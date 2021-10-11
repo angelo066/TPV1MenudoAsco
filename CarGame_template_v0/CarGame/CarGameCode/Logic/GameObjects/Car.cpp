@@ -21,7 +21,7 @@ void  Car::setPosition(double x, double y){
 };
 
 void Car::update() {
-    pos = Point2D<double>(getX() + 1, getY());
+    pos = Point2D<double>(getX() + VSPEED, getY());
 }
 
 Car::~Car(){};
@@ -46,4 +46,15 @@ SDL_Rect Car::getCollider(){
              int(getY() - getHeight()/2),
              getWidth(),
              getHeight()};
+}
+
+void Car::acelerate(bool imFast)
+{
+	//Un montond e ifs, complicado
+	if (VSPEED == 0) VSPEED = 1;
+
+	if (imFast && VSPEED*ACCELERATION <= MAX_SPEED) VSPEED = VSPEED * ACCELERATION;
+	
+	if (!imFast) VSPEED = VSPEED * DECELERATION;
+
 }

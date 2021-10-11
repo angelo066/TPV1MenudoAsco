@@ -45,6 +45,18 @@ void ViewController::handleEvents() {
     while (SDL_PollEvent(&event) ){
         if( event.type == SDL_QUIT)
             game->setUserExit();
+		else if (event.key.keysym.sym == SDLK_UP) {
+			game->moveCar(true);
+		}
+		else if (event.key.keysym.sym == SDLK_DOWN) {
+			game->moveCar(false);
+		}
+		else if (event.key.keysym.sym == SDLK_RIGHT) {
+			game->acelerateCar(true);
+		}
+		else if (event.key.keysym.sym == SDLK_LEFT) {
+			game->acelerateCar(false);
+		}
     }
 }
 

@@ -18,7 +18,7 @@ private:
 
     const double ACCELERATION = 1.3;
     const double DECELERATION = 0.9;
-    const int VSPEED = 5;
+    float VSPEED = 0;
     const int MAX_SPEED = 10;
     const int INITIAL_POWER = 3;
 
@@ -46,6 +46,8 @@ public:
     void setPosition(double x, double y);
 
     SDL_Rect getCollider();
+
+	void acelerate(bool imFast);
 };
 
 

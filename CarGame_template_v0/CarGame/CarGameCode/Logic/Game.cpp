@@ -95,3 +95,22 @@ Texture *Game::getTexture(TextureName name) {
 Point2D<int> Game::getOrigin() {
     return {int(-(car->getX() - car->getWidth())), 0};
 }
+
+void Game::moveCar(bool up)
+{
+	//Si va hacia arriba lo restamos, si va hacia abajo sumamos
+	float y = car->getY();
+	if (up && y - CAR_HEIGHT/2 - 5 >= 0) {
+		car->setPosition(car->getX(), y - 5);
+	}
+
+
+	if(!up && y + CAR_HEIGHT/2 <= height){
+		car->setPosition(car->getX(), y + 5);
+	}
+}
+
+void Game::acelerateCar(bool imFast)
+{
+	car->acelerate(imFast);
+}

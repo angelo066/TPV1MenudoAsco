@@ -62,6 +62,9 @@ public:
 
     void drawInfo();
 
+	void moveCar(bool up);
+
+	void acelerateCar(bool imFast);
 };
 
 
