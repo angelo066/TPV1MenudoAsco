@@ -9,6 +9,9 @@ Car::Car(Game *game){
     this->game = game;
     texture = nullptr;
 
+	//todos a false
+	acelerating = false;
+	up = down = false;
 }
 
 void Car::setDimension(int width, int height){
@@ -21,7 +24,15 @@ void  Car::setPosition(double x, double y){
 };
 
 void Car::update() {
-    pos = Point2D<double>(getX() + VSPEED, getY());
+	//Luego con los estados hago que al principio no se mueva
+	if(!acelerating)HSPEED = HSPEED * DECELERATION;
+	else if(acelerating && HSPEED * ACCELERATION <= MAX_SPEED) HSPEED = HSPEED * ACCELERATION;
+
+    pos = Point2D<double>(getX() + HSPEED, getY());
+
+	float y = getY();
+    if(up && y - h / 2 - 5 >= 0)pos = Point2D<double>(getX(), getY() - VSPEED);
+	else if(down && y + h / 2 <= game->getWindowHeight())pos = Point2D<double>(getX(), getY() + VSPEED);
 }
 
 Car::~Car(){};
@@ -51,10 +62,26 @@ SDL_Rect Car::getCollider(){
 void Car::acelerate(bool imFast)
 {
 	//Un montond e ifs, complicado
-	if (VSPEED == 0) VSPEED = 1;
+	if (imFast && HSPEED == 0) HSPEED = 1;
 
-	if (imFast && VSPEED*ACCELERATION <= MAX_SPEED) VSPEED = VSPEED * ACCELERATION;
+	if (imFast && HSPEED * ACCELERATION <= MAX_SPEED) {
+		acelerating = true;
+	}
 	
-	if (!imFast) VSPEED = VSPEED * DECELERATION;
+	if (!imFast) {
+		acelerating = false;
+	}
 
+}
+
+void Car::goinUp(bool upper)
+{
+	if (upper) {
+		up = true;
+		down = false;
+	}
+	else {
+		up = false;
+		down = true;
+	}
 }

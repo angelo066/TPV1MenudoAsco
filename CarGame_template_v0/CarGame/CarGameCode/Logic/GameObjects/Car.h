@@ -18,16 +18,19 @@ private:
 
     const double ACCELERATION = 1.3;
     const double DECELERATION = 0.9;
-    float VSPEED = 0;
+    const float VSPEED = 5;
     const int MAX_SPEED = 10;
     const int INITIAL_POWER = 3;
+
+	float HSPEED = 0;
 
     Point2D<double> pos;
     int w, h;
     Game *game;
     Texture *texture;
-
-
+	//up y down para que al principio
+	//no se mueva ni para arriba ni para abajo
+	bool up,down, acelerating;
 public:
     Car(Game *game);
     ~Car();
@@ -48,6 +51,8 @@ public:
     SDL_Rect getCollider();
 
 	void acelerate(bool imFast);
+
+	void goinUp(bool upper);
 };
 
 

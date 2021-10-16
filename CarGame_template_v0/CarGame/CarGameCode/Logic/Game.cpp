@@ -101,12 +101,11 @@ void Game::moveCar(bool up)
 	//Si va hacia arriba lo restamos, si va hacia abajo sumamos
 	float y = car->getY();
 	if (up && y - CAR_HEIGHT/2 - 5 >= 0) {
-		car->setPosition(car->getX(), y - 5);
+		car->goinUp(true);
 	}
 
-
 	if(!up && y + CAR_HEIGHT/2 <= height){
-		car->setPosition(car->getX(), y + 5);
+		car->goinUp(false);
 	}
 }
 
