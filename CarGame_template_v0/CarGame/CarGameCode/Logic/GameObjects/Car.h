@@ -5,7 +5,7 @@
 #ifndef CARGAME_CAR_H
 #define CARGAME_CAR_H
 
-
+//Se hace aqui el truqi 
 class Game;
 
 #include "../../Utils/Vector2D.h"
@@ -45,6 +45,8 @@ public:
     double getY() {return pos.getY();};
     int getWidth() {return w;};
     int getHeight() {return h;};
+
+	float getHorizontalV() { return HSPEED; }
 
     void setPosition(double x, double y);
 

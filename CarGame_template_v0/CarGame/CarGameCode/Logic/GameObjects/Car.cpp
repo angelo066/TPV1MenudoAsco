@@ -2,7 +2,7 @@
 // Created by eys on 21/8/21.
 //
 
-#include "Car.h"
+#include "Car.h" //El truco del almendruco
 #include "../Game.h"
 
 Car::Car(Game *game){
@@ -41,7 +41,6 @@ void Car::draw() {
     drawTexture(game->getTexture(carTexture));
 }
 
-
 void Car::drawTexture(Texture *texture) {
     int dX = game->getOrigin().getX();
     int dY = game->getOrigin().getY();
@@ -51,11 +50,11 @@ void Car::drawTexture(Texture *texture) {
     texture->render(textureBox);
 }
 
-
+//Creo que está mal, preguntar
 SDL_Rect Car::getCollider(){
     return { int(getX() - getWidth()),
-             int(getY() - getHeight()/2),
-             getWidth(),
+             int(getY() - getHeight()/2), //Por que /2?
+             getWidth(),				
              getHeight()};
 }
 

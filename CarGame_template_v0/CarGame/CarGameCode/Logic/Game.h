@@ -15,7 +15,10 @@
 #include "../View/Font.h"
 
 #include "GameObjects/Car.h"
+#include "GameObjects/Wall.h"
 
+//Linea 23 wall.cpp
+//Linea 52 game.cpp
 
 using namespace std;
 
@@ -23,18 +26,28 @@ class Game{
 
 
 private:
+	const int nWalls = 20;
+
     string name;
     bool doExit;
     int roadLength;
-    int width, height;
+    int width, height; //La ventana
     Car *car = nullptr;
 
     TextureContainer *textureContainer;
     SDL_Renderer* renderer = nullptr;
     Font *font;
+
+	std::vector<Wall*> walls;
+
+
+	void setWalls();
 public:
     const unsigned int CAR_WIDTH = 100;
     const unsigned  int CAR_HEIGHT = 50;
+
+	const unsigned int WALL_WIDTH = 50;
+	const unsigned  int WALL_HEIGHT = 50;
 
     Game(string name, int width, int height, int roadLength);
     ~Game();
@@ -65,6 +78,8 @@ public:
 	void moveCar(bool up);
 
 	void acelerateCar(bool imFast);
+
+	int random(int min,int max);
 };
 
 

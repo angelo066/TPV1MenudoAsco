@@ -4,6 +4,7 @@
 
 #include "Game.h"
 
+
 Game::Game(string name, int width, int height, int roadLength) {
     this->name = name;
     this->roadLength = roadLength;
@@ -17,6 +18,22 @@ void Game::startGame() {
     car = new Car(this);
     car->setDimension(CAR_WIDTH, CAR_HEIGHT);
     car->setPosition(car->getWidth(), height/ 2.0);
+
+	setWalls();
+}
+
+void Game::setWalls()
+{
+	for (int i = 0; i < nWalls; i++) {
+		double x = random(300, roadLength);
+		double y = random(0, height);
+
+		Wall* w = new Wall(this, car,x, y, WALL_WIDTH, WALL_HEIGHT);
+		walls.push_back(w);
+		if (i == 19) {
+			cout << "tres";
+		}
+	}
 }
 
 string Game::getGameName() {
@@ -34,6 +51,11 @@ void Game::update(){
 void Game::draw(){
     car->draw();
     drawInfo();
+
+	//Es viable usar auto o vivimos en el siglo 16?
+	for (auto w : walls) {
+		w->draw();
+	}
 }
 
 void Game::drawInfo() {
@@ -91,7 +113,7 @@ bool Game::doQuit() {
 Texture *Game::getTexture(TextureName name) {
     return textureContainer->getTexture(name);
 }
-
+//Returneas la esquina superior iz. coche
 Point2D<int> Game::getOrigin() {
     return {int(-(car->getX() - car->getWidth())), 0};
 }
@@ -112,4 +134,9 @@ void Game::moveCar(bool up)
 void Game::acelerateCar(bool imFast)
 {
 	car->acelerate(imFast);
+}
+
+int Game::random(int min,int max)
+{
+	return rand() % max + min;
 }
