@@ -48,7 +48,7 @@ bool Game::pointOcuppied(double x, double y)
 		!pointInRect(Point2D<double>(x,y), 
 			walls[i]->getDestRect())) i++;
 
-	if (i < walls.size())occuppied = true;
+	if (i == walls.size())occuppied = true;
 	return occuppied;
 }
 
