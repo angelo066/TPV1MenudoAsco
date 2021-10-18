@@ -13,6 +13,13 @@ Wall::Wall(Game* gam, Car* p, double x, double y, int w_, int h_)
 	h = h_;
 }
 
+void Wall::update()
+{
+	//Para que se muevan
+	pos = Point2D<double>(pos.getX() - player->getHorizontalV(),
+		pos.getY());
+}
+
 void Wall::draw()
 {
 	drawTexture(g->getTexture(rockTexture));
@@ -21,9 +28,6 @@ void Wall::draw()
 //getRect
 SDL_Rect Wall::getRect()
 {	
-	//Para que se muevan
-	pos = Point2D<double>(pos.getX() - player->getHorizontalV(), 
-		pos.getY());
 
 	return { int(pos.getX()),
 		  int(pos.getY()), //Por que /2?
@@ -36,5 +40,13 @@ void Wall::drawTexture(Texture* texture)
 	SDL_Rect c = getRect();
 	SDL_Rect textureBox = { c.x, c.y, c.w, c.h };
 	texture->render(textureBox);
+}
+
+SDL_Rect Wall::getDestRect()
+{
+	return { int(pos.getX()),
+	  int(pos.getY()), //Por que /2?
+	  w,						//Porque le pone 1/2 arri. y otro abajo?
+	  h };
 }
 

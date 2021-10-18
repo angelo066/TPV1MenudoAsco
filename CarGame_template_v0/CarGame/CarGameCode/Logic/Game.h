@@ -17,8 +17,6 @@
 #include "GameObjects/Car.h"
 #include "GameObjects/Wall.h"
 
-//Linea 23 wall.cpp
-//Linea 52 game.cpp
 
 using namespace std;
 
@@ -42,6 +40,8 @@ private:
 
 
 	void setWalls();
+	bool pointOcuppied(double x, double y);
+
 public:
     const unsigned int CAR_WIDTH = 100;
     const unsigned  int CAR_HEIGHT = 50;
@@ -80,6 +80,8 @@ public:
 	void acelerateCar(bool imFast);
 
 	int random(int min,int max);
+
+	bool pointInRect(Point2D<double>p, SDL_Rect r);
 };
 
 

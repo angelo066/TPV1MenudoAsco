@@ -28,12 +28,28 @@ void Game::setWalls()
 		double x = random(300, roadLength);
 		double y = random(0, height);
 
-		Wall* w = new Wall(this, car,x, y, WALL_WIDTH, WALL_HEIGHT);
-		walls.push_back(w);
-		if (i == 19) {
-			cout << "tres";
+		if (!pointOcuppied(x, y)) {
+			Wall* w = new Wall(this, car, x, y, WALL_WIDTH, WALL_HEIGHT);
+			walls.push_back(w);
 		}
 	}
+}
+
+bool Game::pointOcuppied(double x, double y)
+{
+	//Caso en el que no tengo muros
+	if (walls.empty()) return false;
+
+	bool occuppied = false;
+	int i = 0;
+
+	//Comprobamos posiciones en todos los walls
+	while (i < walls.size() &&
+		!pointInRect(Point2D<double>(x,y), 
+			walls[i]->getDestRect())) i++;
+
+	if (i < walls.size())occuppied = true;
+	return occuppied;
 }
 
 string Game::getGameName() {
@@ -46,6 +62,8 @@ Game::~Game() {
 
 void Game::update(){
     car->update();
+
+	for (auto w : walls) w->update();
 }
 
 void Game::draw(){
@@ -139,4 +157,13 @@ void Game::acelerateCar(bool imFast)
 int Game::random(int min,int max)
 {
 	return rand() % max + min;
+}
+
+bool Game::pointInRect(Point2D<double> p, SDL_Rect r)
+{
+	double extremoD = p.getX() + r.x + r.w;
+	double extremoS = p.getY() + r.y + r.h;
+
+	return (p.getX() > r.x && p.getX() < extremoD
+		&& p.getY() > r.y && p.getY() < extremoS);
 }

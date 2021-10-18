@@ -20,6 +20,9 @@ private:
 public:
 	Wall(Game* gam, Car* p, double x, double y, int w_, int h_);
 
+	void update();
 	void draw();
 	void drawTexture(Texture* texture);
+
+	SDL_Rect getDestRect();
 };
