@@ -69,6 +69,11 @@ void ViewController::handleEvents() {
 			}
 			break;
 		case Gameover:
+			if (event.key.keysym.sym == SDLK_SPACE) {
+				game->changeState(Playing);
+
+				game->resetGame();
+			}
 
 			break;
 		default:

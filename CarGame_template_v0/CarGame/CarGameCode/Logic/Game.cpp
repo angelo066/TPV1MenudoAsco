@@ -16,11 +16,16 @@ Game::Game(string name, int width, int height, int roadLength) {
 }
 
 void Game::startGame() {
+	//Coche
     car = new Car(this);
     car->setDimension(CAR_WIDTH, CAR_HEIGHT);
 	//Para que la posicion sea el extremo derecho central
     car->setPosition(car->getWidth(), height/ 2.0);
 
+	//Meta
+	m.t = getTexture(goalTexture);
+	m.pos = Point2D<double>(roadLength,0);
+	//Muros
 	setWalls();
 }
 
@@ -28,7 +33,7 @@ void Game::setWalls()
 {
 	for (int i = 0; i < nWalls; i++) {
 		double x = random(300, roadLength);
-		double y = random(0, height);
+		double y = random(30, height);
 
 		Wall* w = new Wall(this, car, x, y, WALL_WIDTH, WALL_HEIGHT);
 		if (!pointOcuppied(w->getRect())) {
@@ -55,12 +60,20 @@ bool Game::pointOcuppied(SDL_Rect newR)
 	return occuppied;
 }
 
+void Game::clearWalls()
+{
+	walls.clear();
+}
+
 string Game::getGameName() {
     return name;
 }
 
 Game::~Game() {
     cout << "[DEBUG] deleting game" << endl;
+
+	clearWalls();
+	delete car;
 }
 
 void Game::update(){
@@ -70,8 +83,10 @@ void Game::update(){
 
 		break;
 	case Playing:
+		//Coche
 		car->update();
 
+		//Muros
 		for (auto w : walls) w->update();
 
 		//Para que no chequee cuando no haya muros
@@ -79,6 +94,23 @@ void Game::update(){
 			power--;
 			car->stop();
 		}
+		//Meta (Para que se mueva)
+		m.update(car->getHorizontalV());
+
+		//Lógica del juego	//Para que se vea cruzar la meta
+		if (car->getX() > roadLength + CAR_WIDTH) {
+			changeState(Gameover);
+
+			razeWon = true;
+		}
+
+		if (power == 0) {
+			changeState(Gameover);
+
+			razeWon = false;
+		}
+
+		razeTime++;
 
 		break;
 	case Gameover:
@@ -103,8 +135,12 @@ void Game::draw(){
 			w->draw();
 		}
 
+		drawGoal();
+
 		break;
 	case Gameover:
+
+		drawGameOverMessage();
 		break;
 	default:
 		break;
@@ -126,17 +162,53 @@ void Game::drawMenuMessage()
 	rect.y += 10;
 }
 
+void Game::drawGameOverMessage()
+{
+	SDL_Rect rect = { getWindowWidth() / 2 - 100,
+	getWindowHeight() / 2 - 50, 200,200 };
+
+	if (razeWon) {
+		renderText("Congratulations, you won", rect.x, rect.y);
+		rect.y += 10;
+		renderText("You needed: " + to_string(razeTime / 30) +" seconds", rect.x, rect.y);
+		rect.y += 10;
+		renderText("Press space to play again", rect.x, rect.y);
+		rect.y += 10;
+	}
+	else {
+		renderText("Te comiste todos los muros de España", rect.x, rect.y);
+		rect.y += 10;
+		renderText("Press space to play again", rect.x, rect.y);
+		rect.y += 10;
+	}
+
+}
+
 void Game::drawInfo() {
-int x = font->getSize() / 2;
-int y = font->getSize() / 2;
+	int x = font->getSize() / 2;
+	int y = font->getSize() / 2;
 
-SDL_Rect rect = { 0, 0, getWindowWidth(),
+	SDL_Rect rect = { 0, 0, getWindowWidth(),
 				 int(font->getSize() * 1.8) };
-Box(rect, BLACK).render(renderer);
+	Box(rect, BLACK).render(renderer);
 
-string s = "Pos: " + to_string(int(car->getX())) + " "
-+ to_string(int(car->getY()));
-renderText(s, x, y);
+	string s = "Pos: " + to_string(int(car->getX())) + " "
+	+ to_string(int(car->getY())) + " "+ "Distance left:" + 
+	to_string((int)roadLength - (int)car->getX()) + " "
+		+ "Speed:" + to_string(car->getHorizontalV()) + " "+
+		"Power: " + to_string(power) + " " + "Walls number: " +
+		to_string(walls.size()) + " " +"Time:" + 
+		to_string(razeTime / 30);	//30 porque son los FPS
+
+
+	renderText(s, x, y);
+}
+
+void Game::drawGoal()
+{
+	SDL_Rect dest = { m.pos.getX(), m.pos.getY(), 50, height };
+
+	m.t->render(dest);
 }
 
 void Game::setUserExit() {
@@ -251,6 +323,9 @@ bool Game::checkCollisions()
 		SDL_Rect wallR = walls[i]->getRect();
 		collision = rectInRect(wallR, carR);
 
+		//Aprovecho para comprobarlo aqui, 
+		//Asi no doy más vueltas al vector
+		if (wallR.x < 0)deleteWall(i);
 	}
 
 	if (collision)
@@ -263,4 +338,18 @@ void Game::deleteWall(int indice)
 {
 	delete walls[indice];
 	walls.erase(walls.begin() + indice);
+}
+
+void Game::resetGame()
+{
+	power = 3;
+	razeWon = false;
+	car->setPosition(0, height / 2);
+	car->stop();
+	razeTime = 0;
+
+	clearWalls();
+	setWalls();
+
+	m.pos.setX(roadLength);
 }

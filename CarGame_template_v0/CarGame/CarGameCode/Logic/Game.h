@@ -19,12 +19,24 @@
 
 enum States{Menu, Playing, Gameover};
 
+
 using namespace std;
+	//Struct de la meta para que sea más fácil construirla
+struct Meta {
+	Point2D<double> pos;
+
+	Texture* t;
+
+	void update(double carVel) {
+		pos.setX(pos.getX() - carVel);
+	}
+};
 
 class Game{
 
 
 private:
+
 	const int nWalls = 20;
 
     const unsigned int CAR_WIDTH = 100;
@@ -34,12 +46,13 @@ private:
 	const unsigned  int WALL_HEIGHT = 50;
 
     string name;
-    bool doExit;
+	bool doExit, razeWon;
     int roadLength;
     int width, height; //La ventana
     Car *car = nullptr;
 
 	States s;
+	Meta m;
 
     TextureContainer *textureContainer;
     SDL_Renderer* renderer = nullptr;
@@ -48,10 +61,11 @@ private:
 	std::vector<Wall*> walls;
 
 	int power = 3;
+	float razeTime = 0;
 
 	void setWalls();
 	bool pointOcuppied(SDL_Rect newR);
-
+	void clearWalls();
 
 public:
 
@@ -64,6 +78,7 @@ public:
     void draw();
 
 	void drawMenuMessage();
+	void drawGameOverMessage();
 
     void setUserExit();
     bool isUserExit();
@@ -84,6 +99,8 @@ public:
 
     void drawInfo();
 
+	void drawGoal();
+
 	void moveCar(bool up);
 
 	void acelerateCar(bool imFast);
@@ -101,6 +118,8 @@ public:
 	States getState() { return s; }
 
 	void changeState(States newS) { s = newS; }
+
+	void resetGame();
 };
 
 
