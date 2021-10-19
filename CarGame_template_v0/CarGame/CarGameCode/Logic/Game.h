@@ -82,6 +82,10 @@ public:
 	int random(int min,int max);
 
 	bool pointInRect(Point2D<double>p, SDL_Rect r);
+
+	bool rectInRect(const SDL_Rect& r,const SDL_Rect& r2);
+
+	bool checkCollisions();
 };
 
 

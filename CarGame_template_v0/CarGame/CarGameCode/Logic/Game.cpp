@@ -64,6 +64,8 @@ void Game::update(){
     car->update();
 
 	for (auto w : walls) w->update();
+
+	if (checkCollisions())std::cout << "Sandokan";
 }
 
 void Game::draw(){
@@ -77,74 +79,74 @@ void Game::draw(){
 }
 
 void Game::drawInfo() {
-    int x = font->getSize() / 2;
-    int y = font->getSize() / 2;
+int x = font->getSize() / 2;
+int y = font->getSize() / 2;
 
-    SDL_Rect rect = {0, 0, getWindowWidth(),
-                     int(font->getSize() * 1.8)};
-    Box(rect, BLACK).render(renderer);
+SDL_Rect rect = { 0, 0, getWindowWidth(),
+				 int(font->getSize() * 1.8) };
+Box(rect, BLACK).render(renderer);
 
-    string s = "Pos: " + to_string(int(car->getX())) + " "
-               + to_string(int(car->getY()));
-    renderText(s, x, y);
+string s = "Pos: " + to_string(int(car->getX())) + " "
++ to_string(int(car->getY()));
+renderText(s, x, y);
 }
 
 void Game::setUserExit() {
-    doExit = true;
+	doExit = true;
 }
 
 bool Game::isUserExit() {
-    return doExit;
+	return doExit;
 }
 
-int Game::getWindowWidth(){
-    return width;
+int Game::getWindowWidth() {
+	return width;
 }
 
 int Game::getWindowHeight() {
-    return height;
+	return height;
 }
 
-SDL_Renderer *Game::getRenderer() {
-    return renderer;
+SDL_Renderer* Game::getRenderer() {
+	return renderer;
 }
 
-void Game::setRenderer(SDL_Renderer *_renderer) {
-    renderer = _renderer;
+void Game::setRenderer(SDL_Renderer* _renderer) {
+	renderer = _renderer;
 }
 
 void Game::loadTextures() {
-    if(renderer == nullptr)
-        throw string("Renderer is null");
+	if (renderer == nullptr)
+		throw string("Renderer is null");
 
-    textureContainer = new TextureContainer(renderer);
+	textureContainer = new TextureContainer(renderer);
 }
 
-void Game::renderText(string text, int x, int y, SDL_Color color){
-    font->render(renderer, text.c_str(), x, y, color);
+void Game::renderText(string text, int x, int y, SDL_Color color) {
+	font->render(renderer, text.c_str(), x, y, color);
 }
 
 bool Game::doQuit() {
-    return isUserExit();
+	return isUserExit();
 }
 
-Texture *Game::getTexture(TextureName name) {
-    return textureContainer->getTexture(name);
+Texture* Game::getTexture(TextureName name) {
+	return textureContainer->getTexture(name);
 }
 //Returneas la esquina superior iz. coche
 Point2D<int> Game::getOrigin() {
-    return {int(-(car->getX() - car->getWidth())), 0};
+	return { int(-(car->getX() - car->getWidth())), 0 };
 }
 
 void Game::moveCar(bool up)
 {
 	//Si va hacia arriba lo restamos, si va hacia abajo sumamos
 	float y = car->getY();
-	if (up && y - CAR_HEIGHT/2 - 5 >= 0) {
+	if (up && y - CAR_HEIGHT / 2 - 5 >= 0) {
 		car->goinUp(true);
 	}
 
-	if(!up && y + CAR_HEIGHT/2 <= height){
+	if (!up && y + CAR_HEIGHT / 2 <= height) {
 		car->goinUp(false);
 	}
 }
@@ -154,16 +156,45 @@ void Game::acelerateCar(bool imFast)
 	car->acelerate(imFast);
 }
 
-int Game::random(int min,int max)
+int Game::random(int min, int max)
 {
 	return rand() % max + min;
 }
 
 bool Game::pointInRect(Point2D<double> p, SDL_Rect r)
 {
-	double extremoD = p.getX() + r.x + r.w;
-	double extremoS = p.getY() + r.y + r.h;
+	double extremoD = r.x + r.w;
+	double extremoS = r.y + r.h;
 
 	return (p.getX() > r.x && p.getX() < extremoD
 		&& p.getY() > r.y && p.getY() < extremoS);
+}
+
+bool Game::rectInRect(const SDL_Rect& r, const SDL_Rect& r2)
+{
+	//Comprobar every esquina
+	bool insideLUc = pointInRect(Point2D<double>(r.x,r.y), r2);
+	bool insideRUc = pointInRect(Point2D<double>(r.x + r.w, r.y), r2);
+	bool insideLDc = pointInRect(Point2D<double>(r.x + r.w, r.y + r.h), r2);
+	bool insideRDc = pointInRect(Point2D<double>(r.x, r.y + r.h), r2);
+
+	return insideLDc || insideLUc || insideRDc || insideRUc;
+}
+
+bool Game::checkCollisions()
+{
+	int i = 0;
+
+	SDL_Rect carR = car->getCollider();
+
+	bool collision = pointInRect(walls[i]->getPos(), carR);
+	while (i < walls.size() && !collision)
+	{
+		SDL_Rect wallR = walls[i]->getDestRect();
+		collision = rectInRect(wallR, carR);
+
+		i++;
+	}
+
+	return collision;
 }

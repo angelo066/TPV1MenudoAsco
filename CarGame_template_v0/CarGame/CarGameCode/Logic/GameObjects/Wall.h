@@ -24,5 +24,8 @@ public:
 	void draw();
 	void drawTexture(Texture* texture);
 
+	Point2D<double> getPos() { return pos; }
+
+
 	SDL_Rect getDestRect();
 };
