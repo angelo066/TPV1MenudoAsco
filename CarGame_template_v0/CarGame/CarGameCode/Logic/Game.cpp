@@ -12,6 +12,7 @@ Game::Game(string name, int width, int height, int roadLength) {
     this->height = height;
     doExit = false;
     font = new Font("../Images/Monospace.ttf", 12);
+	s = Menu;
 }
 
 void Game::startGame() {
@@ -63,24 +64,66 @@ Game::~Game() {
 }
 
 void Game::update(){
-    car->update();
+	switch (s)
+	{
+	case Menu:
 
-	for (auto w : walls) w->update();
+		break;
+	case Playing:
+		car->update();
 
-	//Para que no chequee cuando no haya muros
-	if (!walls.empty() && checkCollisions()) {
-		power--;
-		car->stop();
+		for (auto w : walls) w->update();
+
+		//Para que no chequee cuando no haya muros
+		if (!walls.empty() && checkCollisions()) {
+			power--;
+			car->stop();
+		}
+
+		break;
+	case Gameover:
+		break;
+	default:
+		break;
 	}
 }
 
 void Game::draw(){
-    car->draw();
-    drawInfo();
+	switch (s)
+	{
+	case Menu:
+		drawMenuMessage();
+		break;
+	case Playing:
 
-	for (auto w : walls) {
-		w->draw();
+		car->draw();
+		drawInfo();
+
+		for (auto w : walls) {
+			w->draw();
+		}
+
+		break;
+	case Gameover:
+		break;
+	default:
+		break;
 	}
+}
+
+void Game::drawMenuMessage()
+{
+	//Le pongo algo de offset para que quede en el medio
+	SDL_Rect rect = { getWindowWidth() / 2 - 100,
+		getWindowHeight() / 2 - 50, 200,200 };
+
+
+	renderText("Welcome To Super Cars", rect.x, rect.y);
+	rect.y += 10;
+	renderText("Level: 0", rect.x, rect.y);
+	rect.y += 10;
+	renderText("Press space to start", rect.x, rect.y);
+	rect.y += 10;
 }
 
 void Game::drawInfo() {

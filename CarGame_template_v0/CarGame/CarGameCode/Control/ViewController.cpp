@@ -43,19 +43,36 @@ void ViewController::clearBackground() {
 void ViewController::handleEvents() {
     SDL_Event event;
     while (SDL_PollEvent(&event) ){
-        if( event.type == SDL_QUIT)
+        if( event.type == SDL_QUIT || event.key.keysym.sym == SDLK_ESCAPE)
             game->setUserExit();
-		else if (event.key.keysym.sym == SDLK_UP) {
-			game->moveCar(true);
-		}
-		else if (event.key.keysym.sym == SDLK_DOWN) {
-			game->moveCar(false);
-		}
-		else if (event.key.keysym.sym == SDLK_RIGHT) {
-			game->acelerateCar(true);
-		}
-		else if (event.key.keysym.sym == SDLK_LEFT) {
-			game->acelerateCar(false);
+
+		switch (game->getState())
+		{
+		case Menu:
+			if (event.key.keysym.sym == SDLK_SPACE) {
+				game->changeState(Playing);
+			}
+
+			break;
+		case Playing:
+			if (event.key.keysym.sym == SDLK_UP) {
+				game->moveCar(true);
+			}
+			else if (event.key.keysym.sym == SDLK_DOWN) {
+				game->moveCar(false);
+			}
+			else if (event.key.keysym.sym == SDLK_RIGHT) {
+				game->acelerateCar(true);
+			}
+			else if (event.key.keysym.sym == SDLK_LEFT) {
+				game->acelerateCar(false);
+			}
+			break;
+		case Gameover:
+
+			break;
+		default:
+			break;
 		}
     }
 }

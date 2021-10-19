@@ -17,6 +17,7 @@
 #include "GameObjects/Car.h"
 #include "GameObjects/Wall.h"
 
+enum States{Menu, Playing, Gameover};
 
 using namespace std;
 
@@ -26,16 +27,19 @@ class Game{
 private:
 	const int nWalls = 20;
 
-    string name;
-    bool doExit;
-    int roadLength;
-    int width, height; //La ventana
-    Car *car = nullptr;
     const unsigned int CAR_WIDTH = 100;
     const unsigned  int CAR_HEIGHT = 50;
 
 	const unsigned int WALL_WIDTH = 50;
 	const unsigned  int WALL_HEIGHT = 50;
+
+    string name;
+    bool doExit;
+    int roadLength;
+    int width, height; //La ventana
+    Car *car = nullptr;
+
+	States s;
 
     TextureContainer *textureContainer;
     SDL_Renderer* renderer = nullptr;
@@ -48,6 +52,7 @@ private:
 	void setWalls();
 	bool pointOcuppied(SDL_Rect newR);
 
+
 public:
 
 
@@ -57,6 +62,8 @@ public:
     void startGame();
     void update();
     void draw();
+
+	void drawMenuMessage();
 
     void setUserExit();
     bool isUserExit();
@@ -90,6 +97,10 @@ public:
 	bool checkCollisions();
 
 	void deleteWall(int indice);
+
+	States getState() { return s; }
+
+	void changeState(States newS) { s = newS; }
 };
 
 
