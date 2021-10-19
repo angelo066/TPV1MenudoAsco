@@ -31,6 +31,11 @@ private:
     int roadLength;
     int width, height; //La ventana
     Car *car = nullptr;
+    const unsigned int CAR_WIDTH = 100;
+    const unsigned  int CAR_HEIGHT = 50;
+
+	const unsigned int WALL_WIDTH = 50;
+	const unsigned  int WALL_HEIGHT = 50;
 
     TextureContainer *textureContainer;
     SDL_Renderer* renderer = nullptr;
@@ -38,16 +43,13 @@ private:
 
 	std::vector<Wall*> walls;
 
+	int power = 3;
 
 	void setWalls();
-	bool pointOcuppied(double x, double y);
+	bool pointOcuppied(SDL_Rect newR);
 
 public:
-    const unsigned int CAR_WIDTH = 100;
-    const unsigned  int CAR_HEIGHT = 50;
 
-	const unsigned int WALL_WIDTH = 50;
-	const unsigned  int WALL_HEIGHT = 50;
 
     Game(string name, int width, int height, int roadLength);
     ~Game();
@@ -86,6 +88,8 @@ public:
 	bool rectInRect(const SDL_Rect& r,const SDL_Rect& r2);
 
 	bool checkCollisions();
+
+	void deleteWall(int indice);
 };
 
 

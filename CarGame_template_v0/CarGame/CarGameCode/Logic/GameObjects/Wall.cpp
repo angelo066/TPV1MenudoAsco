@@ -42,11 +42,3 @@ void Wall::drawTexture(Texture* texture)
 	texture->render(textureBox);
 }
 
-SDL_Rect Wall::getDestRect()
-{
-	return { int(pos.getX()),
-	  int(pos.getY()), //Por que /2?
-	  w,						//Porque le pone 1/2 arri. y otro abajo?
-	  h };
-}
-

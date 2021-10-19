@@ -9,7 +9,6 @@ class Game;
 class Wall {
 
 private:
-	SDL_Rect getRect();
 
 	int w;
 	int h;
@@ -25,7 +24,7 @@ public:
 	void drawTexture(Texture* texture);
 
 	Point2D<double> getPos() { return pos; }
+	void setPos(double newX) { pos.setX(newX); }
 
-
-	SDL_Rect getDestRect();
+	SDL_Rect getRect();
 };

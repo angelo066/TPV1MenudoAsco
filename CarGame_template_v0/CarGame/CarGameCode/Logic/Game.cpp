@@ -17,6 +17,7 @@ Game::Game(string name, int width, int height, int roadLength) {
 void Game::startGame() {
     car = new Car(this);
     car->setDimension(CAR_WIDTH, CAR_HEIGHT);
+	//Para que la posicion sea el extremo derecho central
     car->setPosition(car->getWidth(), height/ 2.0);
 
 	setWalls();
@@ -28,27 +29,28 @@ void Game::setWalls()
 		double x = random(300, roadLength);
 		double y = random(0, height);
 
-		if (!pointOcuppied(x, y)) {
-			Wall* w = new Wall(this, car, x, y, WALL_WIDTH, WALL_HEIGHT);
+		Wall* w = new Wall(this, car, x, y, WALL_WIDTH, WALL_HEIGHT);
+		if (!pointOcuppied(w->getRect())) {
 			walls.push_back(w);
 		}
 	}
 }
 
-bool Game::pointOcuppied(double x, double y)
+bool Game::pointOcuppied(SDL_Rect newR)
 {
 	//Caso en el que no tengo muros
 	if (walls.empty()) return false;
 
-	bool occuppied = false;
 	int i = 0;
+	bool occuppied = rectInRect(newR, walls[i]->getRect());
 
 	//Comprobamos posiciones en todos los walls
-	while (i < walls.size() &&
-		!pointInRect(Point2D<double>(x,y), 
-			walls[i]->getDestRect())) i++;
+	while (i < walls.size() && !occuppied) {
+		occuppied = rectInRect(newR, walls[i]->getRect());
 
-	if (i == walls.size())occuppied = true;
+		i++;
+	}
+
 	return occuppied;
 }
 
@@ -65,14 +67,17 @@ void Game::update(){
 
 	for (auto w : walls) w->update();
 
-	if (checkCollisions())std::cout << "Sandokan";
+	//Para que no chequee cuando no haya muros
+	if (!walls.empty() && checkCollisions()) {
+		power--;
+		car->stop();
+	}
 }
 
 void Game::draw(){
     car->draw();
     drawInfo();
 
-	//Es viable usar auto o vivimos en el siglo 16?
 	for (auto w : walls) {
 		w->draw();
 	}
@@ -186,15 +191,33 @@ bool Game::checkCollisions()
 	int i = 0;
 
 	SDL_Rect carR = car->getCollider();
+	//Le sumo el origen para que las colisiones se hagan como
+	//si estuviera a 0, que es donde esta en SDL
+	int dX = getOrigin().getX();
+	int dY = getOrigin().getY();
+	carR.x += dX;
+	carR.y += dY;
+
 
 	bool collision = pointInRect(walls[i]->getPos(), carR);
-	while (i < walls.size() && !collision)
+
+	//-1 porque comprobamos el primero arriba
+	while (i < walls.size() - 1 && !collision)
 	{
-		SDL_Rect wallR = walls[i]->getDestRect();
+		i++;
+		SDL_Rect wallR = walls[i]->getRect();
 		collision = rectInRect(wallR, carR);
 
-		i++;
 	}
 
+	if (collision)
+		deleteWall(i);
+
 	return collision;
+}
+
+void Game::deleteWall(int indice)
+{
+	delete walls[indice];
+	walls.erase(walls.begin() + indice);
 }

@@ -42,6 +42,7 @@ void Car::draw() {
 }
 
 void Car::drawTexture(Texture *texture) {
+	//Se lo resta para que este siempre en el mismo punto
     int dX = game->getOrigin().getX();
     int dY = game->getOrigin().getY();
 
@@ -52,10 +53,12 @@ void Car::drawTexture(Texture *texture) {
 
 //Creo que está mal, preguntar
 SDL_Rect Car::getCollider(){
+	//Porque mide la posicion como el extremo derecho central
     return { int(getX() - getWidth()),
-             int(getY() - getHeight()/2), //Por que /2?
-             getWidth(),				
+             int(getY() - getHeight() / 2), //Por que /2? 
+             getWidth(),				//Porque y está a la mitad
              getHeight()};
+
 }
 
 void Car::acelerate(bool imFast)
@@ -83,4 +86,11 @@ void Car::goinUp(bool upper)
 		up = false;
 		down = true;
 	}
+}
+
+void Car::stop()
+{
+	HSPEED = 0;
+	up = false;
+	down = false;
 }

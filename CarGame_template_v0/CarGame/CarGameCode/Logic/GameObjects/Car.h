@@ -55,6 +55,8 @@ public:
 	void acelerate(bool imFast);
 
 	void goinUp(bool upper);
+
+	void stop();
 };
 
 
