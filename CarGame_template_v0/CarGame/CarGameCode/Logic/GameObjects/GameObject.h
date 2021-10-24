@@ -20,27 +20,27 @@ protected:
     void drawTexture(Texture* texture);
 public:
 
-    GameObject(Game *game): game(game){};
+    GameObject(Game *game_): game(game_){};
     virtual ~GameObject(){};
 
     virtual void draw()=0;
-    virtual void drawDebug();
+	virtual void drawDebug() {};
     virtual void update()=0;
 
     virtual bool toDelete(){return false;}
     virtual void onEnter(){};
     virtual void onDelete(){};
 
-    void setPosition(double x, double y);
-    void setDimension(double width, double height);
+	void setPosition(double x, double y);
+	void setDimension(double width, double height);
 
     int getWidth() {return w;};
     int getHeight() {return h;};
 
     int getX() {return pos.getX();};
     int getY() {return pos.getY();};
-    virtual SDL_Rect getCollider();
-    virtual SDL_Rect getCenter();
+	virtual SDL_Rect getCollider() { return { 0,0,0,0 }; }
+	virtual SDL_Rect getCenter() { return { 0,0,0,0 }; }
 
     bool collide(SDL_Rect other);
 };

@@ -1,4 +1,6 @@
 #include "QuitCommand.h"
+#include "..//..//Logic/Game.h"
+
 
 bool QuitCommand::parse(SDL_Event &event) {
     if( event.type == SDL_QUIT)

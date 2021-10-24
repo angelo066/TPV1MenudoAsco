@@ -5,7 +5,7 @@
 #include "Car.h" //El truco del almendruco
 #include "../Game.h"
 
-Car::Car(Game *game){
+Car::Car(Game *game) : GameObject(game){
     this->game = game;
     texture = nullptr;
 
@@ -14,25 +14,16 @@ Car::Car(Game *game){
 	up = down = false;
 }
 
-void Car::setDimension(int width, int height){
-    w = width;
-    h = height;
-};
-
-void  Car::setPosition(double x, double y){
-    pos = Point2D<double>(x, y);
-};
-
 void Car::update() {
 	//Luego con los estados hago que al principio no se mueva
 	if(!acelerating)HSPEED = HSPEED * DECELERATION;
 	else if(acelerating && HSPEED * ACCELERATION <= MAX_SPEED) HSPEED = HSPEED * ACCELERATION;
 
-    pos = Point2D<double>(getX() + HSPEED, getY());
+    setPosition(getX() + HSPEED, getY());
 
 	float y = getY();
-    if(up && y - h / 2 - 5 >= 0)pos = Point2D<double>(getX(), getY() - VSPEED);
-	else if(down && y + h / 2 <= game->getWindowHeight())pos = Point2D<double>(getX(), getY() + VSPEED);
+    if(up && y - getHeight() / 2 - 5 >= 0)setPosition(getX(), getY() - VSPEED);
+	else if(down && y + getHeight() / 2 <= game->getWindowHeight())setPosition(getX(), getY() + VSPEED);
 }
 
 Car::~Car(){};

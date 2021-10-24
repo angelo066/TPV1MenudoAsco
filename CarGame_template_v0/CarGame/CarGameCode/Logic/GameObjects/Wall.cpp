@@ -2,37 +2,35 @@
 #include "..//Game.h"
 
 
-Wall::Wall(Game* gam, Car* p, double x, double y, int w_, int h_)
+Wall::Wall(Game* gam, Car* p, double x, 
+	double y, int w_, int h_) : BadObject(gam)
 {
-	g = gam;
 	player = p;
 
-	pos = Point2D<double>(x - player->getX(), y - player->getY());
-
-	w = w_;
-	h = h_;
+	setPosition(x - player->getX(), y - player->getY());
+	setDimension(w_, h_);
 }
 
 void Wall::update()
 {
 	//Para que se muevan
-	pos = Point2D<double>(pos.getX() - player->getHorizontalV(),
-		pos.getY());
+	setPosition(getX() - player->getHorizontalV(),
+		getY());
 }
 
 void Wall::draw()
 {
-	drawTexture(g->getTexture(rockTexture));
+	drawTexture(game->getTexture(rockTexture));
 }
 
 //getRect
 SDL_Rect Wall::getRect()
 {	
 
-	return { int(pos.getX()),
-		  int(pos.getY()), //Por que /2?
-		  w,						//Porque le pone 1/2 arri. y otro abajo?
-		  h };
+	return { int(getX()),
+		  int(getY()), //Por que /2?
+		  getWidth(),						//Porque le pone 1/2 arri. y otro abajo?
+		  getHeight() };
 }
 
 void Wall::drawTexture(Texture* texture)

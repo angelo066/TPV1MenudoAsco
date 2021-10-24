@@ -123,7 +123,8 @@ public:
 	void resetGame();
 
 	bool isRebased(GameObject* gO) { return false; }
-};
 
+	void appendHelpInfo(string info) {};
+};
 
 #endif //CARGAME_GAME_H

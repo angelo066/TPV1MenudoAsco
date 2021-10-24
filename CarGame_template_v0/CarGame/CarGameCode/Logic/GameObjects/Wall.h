@@ -3,17 +3,14 @@
 #include "../../View/Texture.h"
 #include "../../View/Box.h"
 #include "Car.h"
+#include "BadObject.h"
 
 class Game;
 
-class Wall {
+class Wall : BadObject{
 
 private:
 
-	int w;
-	int h;
-	Point2D<double> pos;
-	Game* g;
 	Car* player;
 
 public:
@@ -22,9 +19,6 @@ public:
 	void update();
 	void draw();
 	void drawTexture(Texture* texture);
-
-	Point2D<double> getPos() { return pos; }
-	void setPos(double newX) { pos.setX(newX); }
 
 	SDL_Rect getRect();
 };

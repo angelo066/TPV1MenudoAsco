@@ -4,7 +4,6 @@
 
 #include "Game.h"
 
-
 Game::Game(string name, int width, int height, int roadLength) {
     this->name = name;
     this->roadLength = roadLength;
@@ -48,11 +47,11 @@ bool Game::pointOcuppied(SDL_Rect newR)
 	if (walls.empty()) return false;
 
 	int i = 0;
-	bool occuppied = rectInRect(newR, walls[i]->getRect());
+	bool occuppied = SDL_HasIntersection(&newR, &walls[i]->getRect());
 
 	//Comprobamos posiciones en todos los walls
 	while (i < walls.size() && !occuppied) {
-		occuppied = rectInRect(newR, walls[i]->getRect());
+		occuppied = SDL_HasIntersection(&newR, &walls[i]->getRect());
 
 		i++;
 	}
