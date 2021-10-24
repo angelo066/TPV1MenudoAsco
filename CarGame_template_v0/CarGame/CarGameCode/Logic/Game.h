@@ -17,6 +17,9 @@
 #include "GameObjects/Car.h"
 #include "GameObjects/Wall.h"
 #include "GameObjects/GameObject.h"
+#include "GameObjectContainer.h"
+#include "GameObjects/BadObject.h"
+#include "GameObjectGenerator.h"
 
 enum States{Menu, Playing, Gameover};
 
@@ -60,6 +63,9 @@ private:
     Font *font;
 
 	std::vector<Wall*> walls;
+
+	GameObjectContainer* container;
+	GameObjectGenerator* generator;
 
 	int power = 3;
 	float razeTime = 0;
@@ -125,6 +131,12 @@ public:
 	bool isRebased(GameObject* gO) { return false; }
 
 	void appendHelpInfo(string info) {};
+
+	double getRoadL() { return roadLength; }
+
+	void addGameObject(GameObject* go) { container->add(go); }
+
+	Car* getCar() { return car; }
 };
 
 #endif //CARGAME_GAME_H

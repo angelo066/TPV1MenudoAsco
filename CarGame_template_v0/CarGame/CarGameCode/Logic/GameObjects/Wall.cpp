@@ -2,10 +2,10 @@
 #include "..//Game.h"
 
 
-Wall::Wall(Game* gam, Car* p, double x, 
+Wall::Wall(Game* gam, double x, 
 	double y, int w_, int h_) : BadObject(gam)
 {
-	player = p;
+	Car* player = game->getCar();
 
 	setPosition(x - player->getX(), y - player->getY());
 	setDimension(w_, h_);
@@ -14,7 +14,7 @@ Wall::Wall(Game* gam, Car* p, double x,
 void Wall::update()
 {
 	//Para que se muevan
-	setPosition(getX() - player->getHorizontalV(),
+	setPosition(getX() - game->getCar()->getHorizontalV(),
 		getY());
 }
 

@@ -1,9 +1,10 @@
 #ifndef CARGAME_GAMEOBJECTGENERATOR_H
 #define CARGAME_GAMEOBJECTGENERATOR_H
 
-#include "Game.h"
 #include "GameObjects/Wall.h"
 
+//He metido aqui class y el include en el cpp
+class Game;
 using Rock = Wall;
 
 class GameObjectGenerator {

@@ -2,10 +2,12 @@
 #define CARGAME_GAMEOBJECTCONTAINER_H
 
 #include <vector>
+#include "GameObjects/GameObject.h"
+#include "GameObjects/Collider.h"
 using namespace std;
 
-class GameObject;
-class Collider;
+//class GameObject;
+//class Collider;
 
 class GameObjectContainer {
     vector<GameObject*> gameObjects;

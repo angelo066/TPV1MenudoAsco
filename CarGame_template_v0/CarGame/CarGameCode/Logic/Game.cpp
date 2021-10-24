@@ -12,11 +12,15 @@ Game::Game(string name, int width, int height, int roadLength) {
     doExit = false;
     font = new Font("../Images/Monospace.ttf", 12);
 	s = Menu;
+
+	container = new GameObjectContainer();
+	generator = new GameObjectGenerator();
 }
 
 void Game::startGame() {
 	//Coche
     car = new Car(this);
+	container->add(car);
     car->setDimension(CAR_WIDTH, CAR_HEIGHT);
 	//Para que la posicion sea el extremo derecho central
     car->setPosition(car->getWidth(), height/ 2.0);
@@ -25,7 +29,8 @@ void Game::startGame() {
 	m.t = getTexture(goalTexture);
 	m.pos = Point2D<double>(roadLength,0);
 	//Muros
-	setWalls();
+	//setWalls();
+	generator->generate(this, 20);
 }
 
 void Game::setWalls()
@@ -34,9 +39,9 @@ void Game::setWalls()
 		double x = random(300, roadLength);
 		double y = random(30, height);
 
-		Wall* w = new Wall(this, car, x, y, WALL_WIDTH, WALL_HEIGHT);
+		Wall* w = new Wall(this,x, y, WALL_WIDTH, WALL_HEIGHT);
 		if (!pointOcuppied(w->getCollider())) {
-			walls.push_back(w);
+			container->add(w);
 		}
 	}
 }
@@ -88,11 +93,7 @@ void Game::update(){
 
 		break;
 	case Playing:
-		//Coche
-		car->update();
-
-		//Muros
-		for (auto w : walls) w->update();
+		container->update();
 
 		//Para que no chequee cuando no haya muros
 		if (!walls.empty() && checkCollisions()) {
@@ -132,13 +133,9 @@ void Game::draw(){
 		drawMenuMessage();
 		break;
 	case Playing:
-
-		car->draw();
+		container->draw();
+		
 		drawInfo();
-
-		for (auto w : walls) {
-			w->draw();
-		}
 
 		drawGoal();
 
