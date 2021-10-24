@@ -20,5 +20,5 @@ public:
 	void draw();
 	void drawTexture(Texture* texture);
 
-	SDL_Rect getRect();
+	virtual SDL_Rect getCollider();
 };

@@ -24,9 +24,8 @@ void Wall::draw()
 }
 
 //getRect
-SDL_Rect Wall::getRect()
+SDL_Rect Wall::getCollider()
 {	
-
 	return { int(getX()),
 		  int(getY()), //Por que /2?
 		  getWidth(),						//Porque le pone 1/2 arri. y otro abajo?
@@ -35,7 +34,7 @@ SDL_Rect Wall::getRect()
 
 void Wall::drawTexture(Texture* texture)
 {
-	SDL_Rect c = getRect();
+	SDL_Rect c = getCollider();
 	SDL_Rect textureBox = { c.x, c.y, c.w, c.h };
 	texture->render(textureBox);
 }

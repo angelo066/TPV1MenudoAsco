@@ -40,7 +40,7 @@ public:
 	float getHorizontalV() { return HSPEED; }
 
 
-    SDL_Rect getCollider();
+    virtual SDL_Rect getCollider();
 	
 	void acelerate(bool imFast);
 

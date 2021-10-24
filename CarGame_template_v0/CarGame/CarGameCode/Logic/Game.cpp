@@ -35,7 +35,7 @@ void Game::setWalls()
 		double y = random(30, height);
 
 		Wall* w = new Wall(this, car, x, y, WALL_WIDTH, WALL_HEIGHT);
-		if (!pointOcuppied(w->getRect())) {
+		if (!pointOcuppied(w->getCollider())) {
 			walls.push_back(w);
 		}
 	}
@@ -47,11 +47,11 @@ bool Game::pointOcuppied(SDL_Rect newR)
 	if (walls.empty()) return false;
 
 	int i = 0;
-	bool occuppied = SDL_HasIntersection(&newR, &walls[i]->getRect());
+	bool occuppied = SDL_HasIntersection(&newR, &walls[i]->getCollider());
 
 	//Comprobamos posiciones en todos los walls
 	while (i < walls.size() && !occuppied) {
-		occuppied = SDL_HasIntersection(&newR, &walls[i]->getRect());
+		occuppied = SDL_HasIntersection(&newR, &walls[i]->getCollider());
 
 		i++;
 	}
@@ -319,7 +319,7 @@ bool Game::checkCollisions()
 	carR.y += dY;
 
 
-	SDL_Rect wallR = walls[i]->getRect();
+	SDL_Rect wallR = walls[i]->getCollider();
 	bool collision = SDL_HasIntersection(&carR, &wallR);
 
 
@@ -327,7 +327,7 @@ bool Game::checkCollisions()
 	while (i < walls.size() - 1 && !collision)
 	{
 		i++;
-		SDL_Rect wallR = walls[i]->getRect();
+		SDL_Rect wallR = walls[i]->getCollider();
 		collision = SDL_HasIntersection(&carR, &wallR);
 
 		//Aprovecho para comprobarlo aqui, 

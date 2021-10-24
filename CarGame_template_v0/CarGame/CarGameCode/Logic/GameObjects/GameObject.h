@@ -38,9 +38,9 @@ public:
     int getHeight() {return h;};
 
     int getX() {return pos.getX();};
-    int getY() {return pos.getY();};
+    int getY() {return pos.getY();};	//! Si no no compila
 	virtual SDL_Rect getCollider() { return { 0,0,0,0 }; }
-	virtual SDL_Rect getCenter() { return { 0,0,0,0 }; }
+	virtual SDL_Rect getCenter();
 
     bool collide(SDL_Rect other);
 };
