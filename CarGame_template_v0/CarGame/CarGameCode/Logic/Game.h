@@ -16,6 +16,7 @@
 
 #include "GameObjects/Car.h"
 #include "GameObjects/Wall.h"
+#include "GameObjects/GameObject.h"
 
 enum States{Menu, Playing, Gameover};
 
@@ -120,6 +121,8 @@ public:
 	void changeState(States newS) { s = newS; }
 
 	void resetGame();
+
+	bool isRebased(GameObject* gO) { return false; }
 };
 
 

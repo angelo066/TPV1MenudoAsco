@@ -17,7 +17,7 @@ private:
 	Car* player;
 
 public:
-	Wall(Game* gam, Car* p, double x, double y, int w_, int h_);
+	Wall(Game* gam, Car* p = nullptr, double x = 0, double y = 0, int w_ = 50, int h_ = 50);
 
 	void update();
 	void draw();
