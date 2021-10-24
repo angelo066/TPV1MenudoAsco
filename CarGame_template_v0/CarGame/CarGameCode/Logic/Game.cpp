@@ -61,7 +61,11 @@ bool Game::pointOcuppied(SDL_Rect newR)
 }
 
 void Game::clearWalls()
-{
+{	//Algo hago mal al borrar los muros, y no se que es
+	for (int i = 0; i < walls.size(); i++) {
+		deleteWall(i);
+	}
+
 	walls.clear();
 }
 
@@ -74,6 +78,8 @@ Game::~Game() {
 
 	clearWalls();
 	delete car;
+	delete textureContainer;
+	delete font;
 }
 
 void Game::update(){
@@ -314,14 +320,16 @@ bool Game::checkCollisions()
 	carR.y += dY;
 
 
-	bool collision = pointInRect(walls[i]->getPos(), carR);
+	SDL_Rect wallR = walls[i]->getRect();
+	bool collision = SDL_HasIntersection(&carR, &wallR);
+
 
 	//-1 porque comprobamos el primero arriba
 	while (i < walls.size() - 1 && !collision)
 	{
 		i++;
 		SDL_Rect wallR = walls[i]->getRect();
-		collision = rectInRect(wallR, carR);
+		collision = SDL_HasIntersection(&carR, &wallR);
 
 		//Aprovecho para comprobarlo aqui, 
 		//Asi no doy más vueltas al vector

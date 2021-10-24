@@ -51,7 +51,6 @@ void Car::drawTexture(Texture *texture) {
     texture->render(textureBox);
 }
 
-//Creo que está mal, preguntar
 SDL_Rect Car::getCollider(){
 	//Porque mide la posicion como el extremo derecho central
     return { int(getX() - getWidth()),

@@ -5,12 +5,8 @@
 #include "../checkML.h"
 
 using namespace std;
-//? Estan bien asi las colisiones ?
-//? Está bien tener un puntero al player desde los walls ?
 
-void exampleLeak() {
-    int* a = new int(5);
-}
+
 
 int main(int argc, char* argv[]){
 
@@ -25,7 +21,6 @@ int main(int argc, char* argv[]){
         cout << e;
     }
 
-    exampleLeak(); // You can remove this line
 	return 0;
 }
 

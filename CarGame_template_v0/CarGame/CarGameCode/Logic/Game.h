@@ -108,7 +108,7 @@ public:
 	int random(int min,int max);
 
 	bool pointInRect(Point2D<double>p, SDL_Rect r);
-
+	//Estos metodos existen porque se me habia olvidado que SDL los hacia solo
 	bool rectInRect(const SDL_Rect& r,const SDL_Rect& r2);
 
 	bool checkCollisions();
