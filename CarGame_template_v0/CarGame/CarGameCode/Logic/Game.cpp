@@ -4,6 +4,8 @@
 
 #include "Game.h"
 
+//! Car se queda fuera del container para poder recorrer el container
+//! Borrando los elementos muertos del mismo
 Game::Game(string name, int width, int height, int roadLength) {
     this->name = name;
     this->roadLength = roadLength;
@@ -13,14 +15,12 @@ Game::Game(string name, int width, int height, int roadLength) {
     font = new Font("../Images/Monospace.ttf", 12);
 	s = Menu;
 
-	container = new GameObjectContainer();
-	generator = new GameObjectGenerator();
+	container = new GameObjectContainer();;
 }
 
 void Game::startGame() {
 	//Coche
     car = new Car(this);
-	container->add(car);
     car->setDimension(CAR_WIDTH, CAR_HEIGHT);
 	//Para que la posicion sea el extremo derecho central
     car->setPosition(car->getWidth(), height/ 2.0);
@@ -30,38 +30,12 @@ void Game::startGame() {
 	m.pos = Point2D<double>(roadLength,0);
 	//Muros
 	//setWalls();
-	generator->generate(this, 20);
+	GameObjectGenerator::generateLevel(this, 15);
 }
 
-void Game::setWalls()
+bool Game::pointOcuppied(GameObject* o)
 {
-	for (int i = 0; i < nWalls; i++) {
-		double x = random(300, roadLength);
-		double y = random(30, height);
-
-		Wall* w = new Wall(this,x, y, WALL_WIDTH, WALL_HEIGHT);
-		if (!pointOcuppied(w->getCollider())) {
-			container->add(w);
-		}
-	}
-}
-
-bool Game::pointOcuppied(SDL_Rect newR)
-{
-	//Caso en el que no tengo muros
-	if (walls.empty()) return false;
-
-	int i = 0;
-	bool occuppied = SDL_HasIntersection(&newR, &walls[i]->getCollider());
-
-	//Comprobamos posiciones en todos los walls
-	while (i < walls.size() && !occuppied) {
-		occuppied = SDL_HasIntersection(&newR, &walls[i]->getCollider());
-
-		i++;
-	}
-
-	return occuppied;
+	return container->hasCollision(o);
 }
 
 void Game::clearWalls()
@@ -84,6 +58,7 @@ Game::~Game() {
 	delete car;
 	delete textureContainer;
 	delete font;
+	delete container;
 }
 
 void Game::update(){
@@ -93,13 +68,11 @@ void Game::update(){
 
 		break;
 	case Playing:
+		car->update();
 		container->update();
 
 		//Para que no chequee cuando no haya muros
-		if (!walls.empty() && checkCollisions()) {
-			power--;
-			car->stop();
-		}
+
 		//Meta (Para que se mueva)
 		m.update(car->getHorizontalV());
 
@@ -133,6 +106,7 @@ void Game::draw(){
 		drawMenuMessage();
 		break;
 	case Playing:
+		car->draw();
 		container->draw();
 		
 		drawInfo();
@@ -336,6 +310,13 @@ bool Game::checkCollisions()
 		deleteWall(i);
 
 	return collision;
+}
+
+vector<GameObject*> Game::getCollisions(GameObject* o)
+{
+
+	return container->getCollisions(o);
+
 }
 
 void Game::deleteWall(int indice)

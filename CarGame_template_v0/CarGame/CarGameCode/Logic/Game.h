@@ -65,13 +65,11 @@ private:
 	std::vector<Wall*> walls;
 
 	GameObjectContainer* container;
-	GameObjectGenerator* generator;
 
 	int power = 3;
 	float razeTime = 0;
 
 	void setWalls();
-	bool pointOcuppied(SDL_Rect newR);
 	void clearWalls();
 
 public:
@@ -120,6 +118,9 @@ public:
 
 	bool checkCollisions();
 
+	//! Extension del antiguo checkCollisions
+	vector<GameObject*> getCollisions(GameObject* o);
+
 	void deleteWall(int indice);
 
 	States getState() { return s; }
@@ -137,6 +138,8 @@ public:
 	void addGameObject(GameObject* go) { container->add(go); }
 
 	Car* getCar() { return car; }
+
+	bool pointOcuppied(GameObject* o);
 };
 
 #endif //CARGAME_GAME_H

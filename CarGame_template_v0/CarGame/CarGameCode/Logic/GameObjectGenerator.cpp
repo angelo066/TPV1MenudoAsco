@@ -19,5 +19,7 @@ void GameObjectGenerator::addInRandomPosition(Game* game, GameObject* o)
 
 	o->setPosition(randPos.getX(), randPos.getY());
 
-	game->addGameObject(o);
+	//! Si no está ocupado, lo ponemos
+	if(!game->pointOcuppied(o))
+		game->addGameObject(o);
 }

@@ -27,16 +27,32 @@ void GameObjectContainer::add(GameObject* gameObject)
 	gameObjects.push_back(gameObject);
 }
 
-bool GameObjectContainer::hasCollision(GameObject* g)
+void GameObjectContainer::removeDead()
 {
-	return false;
+	for (auto gO : gameObjects) {
+		if (gO->toDelete()) {
+			delete gO;
+			//gameObjects.erase(gO);
+		}
+	}
 }
 
+bool GameObjectContainer::hasCollision(GameObject* g)
+{
+	if(getCollisions(g).size() == 0)return false;
+
+	return true;
+}
+
+//? Esto no me deberia devolver una lista de GameObjects?
 vector<Collider*> GameObjectContainer::getCollisions(GameObject* g)
 {
 	vector<Collider*>colliders;
 
-	
+	for (auto gO : gameObjects) {
+		if (SDL_HasIntersection(&g->getCollider(), &gO->getCollider()))
+			colliders.push_back(gO);
+	}
 
 	return colliders;
 }
