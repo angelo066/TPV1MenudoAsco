@@ -1,6 +1,13 @@
 #include "GameObject.h"
 #include "..//Game.h"
 
+void GameObject::drawTexture(Texture* texture)
+{
+	SDL_Rect c = getCollider();
+	SDL_Rect textureBox = { c.x, c.y, c.w, c.h };
+	texture->render(textureBox);
+}
+
 void GameObject::setPosition(double x, double y)
 {
 	pos = Point2D<double>(x, y);

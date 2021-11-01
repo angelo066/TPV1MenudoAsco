@@ -43,12 +43,6 @@ void Car::draw() {
     drawTexture(game->getTexture(carTexture));
 }
 
-void Car::drawTexture(Texture *texture) {
-    SDL_Rect c = getCollider();
-    SDL_Rect textureBox = { c.x, c.y, c.w, c.h};
-    texture->render(textureBox);
-}
-
 SDL_Rect Car::getCollider(){
 	//Porque mide la posicion como el extremo derecho central
 	//? No puedo poner que la x sea siempre 0 y que la y sea 

@@ -25,3 +25,10 @@ void GameObjectGenerator::addInRandomPosition(Game* game, GameObject* o)
 		o->onEnter();
 	}
 }
+
+void GameObjectGenerator::randomPowerUp(Game* g)
+{
+	if (g->random(0, 2)) {
+		addInRandomPosition(g, new Hearth(g));
+	}
+}

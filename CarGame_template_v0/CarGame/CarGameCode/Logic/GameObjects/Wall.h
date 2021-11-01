@@ -12,9 +12,8 @@ class Wall :public BadObject{
 public:
 	Wall(Game* gam, double x = 0, double y = 0, int w_ = 50, int h_ = 50);
 
-	void update();
-	void draw();
-	void drawTexture(Texture* texture);
+	virtual void update();
+	virtual void draw();
 
 	virtual SDL_Rect getCollider();
 

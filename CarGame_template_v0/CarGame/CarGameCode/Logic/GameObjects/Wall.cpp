@@ -44,12 +44,3 @@ bool Wall::receiveCarCollision(Car* car)
 
 	return true;
 }
-
-
-void Wall::drawTexture(Texture* texture)
-{
-	SDL_Rect c = getCollider();
-	SDL_Rect textureBox = { c.x, c.y, c.w, c.h };
-	texture->render(textureBox);
-}
-
