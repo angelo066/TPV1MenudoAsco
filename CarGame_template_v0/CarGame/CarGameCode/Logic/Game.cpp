@@ -30,7 +30,7 @@ void Game::startGame() {
 	m.pos = Point2D<double>(roadLength,0);
 	//Muros
 	//setWalls();
-	GameObjectGenerator::generateLevel(this, 15);
+	GameObjectGenerator::generateLevel(this, nRocks);
 }
 
 bool Game::pointOcuppied(GameObject* o)
@@ -40,11 +40,7 @@ bool Game::pointOcuppied(GameObject* o)
 
 void Game::clearWalls()
 {	//Algo hago mal al borrar los muros, y no se que es
-	for (int i = 0; i < walls.size(); i++) {
-		deleteWall(i);
-	}
 
-	walls.clear();
 }
 
 string Game::getGameName() {
@@ -91,6 +87,7 @@ void Game::update(){
 
 		razeTime++;
 
+		container->removeDead();
 		break;
 	case Gameover:
 		break;
@@ -173,7 +170,7 @@ void Game::drawInfo() {
 	to_string((int)roadLength - (int)car->getX()) + " "
 		+ "Speed:" + to_string(car->getHorizontalV()) + " "+
 		"Power: " + to_string(power) + " " + "Walls number: " +
-		to_string(walls.size()) + " " +"Time:" + 
+		to_string(nRocks) + " " +"Time:" + 
 		to_string(razeTime / 30);	//30 porque son los FPS
 
 
@@ -279,50 +276,17 @@ bool Game::rectInRect(const SDL_Rect& r, const SDL_Rect& r2)
 
 bool Game::checkCollisions()
 {
-	int i = 0;
-
-	SDL_Rect carR = car->getCollider();
-	//Le sumo el origen para que las colisiones se hagan como
-	//si estuviera a 0, que es donde esta en SDL
-	int dX = getOrigin().getX();
-	int dY = getOrigin().getY();
-	carR.x += dX;
-	carR.y += dY;
-
-
-	SDL_Rect wallR = walls[i]->getCollider();
-	bool collision = SDL_HasIntersection(&carR, &wallR);
-
-
-	//-1 porque comprobamos el primero arriba
-	while (i < walls.size() - 1 && !collision)
-	{
-		i++;
-		SDL_Rect wallR = walls[i]->getCollider();
-		collision = SDL_HasIntersection(&carR, &wallR);
-
-		//Aprovecho para comprobarlo aqui, 
-		//Asi no doy más vueltas al vector
-		if (wallR.x < 0)deleteWall(i);
-	}
-
-	if (collision)
-		deleteWall(i);
-
-	return collision;
+	return true;
 }
 
-vector<GameObject*> Game::getCollisions(GameObject* o)
+vector<Collider*> Game::getCollisions(GameObject* o)
 {
-
 	return container->getCollisions(o);
-
 }
 
 void Game::deleteWall(int indice)
 {
-	delete walls[indice];
-	walls.erase(walls.begin() + indice);
+
 }
 
 void Game::resetGame()
@@ -333,8 +297,8 @@ void Game::resetGame()
 	car->stop();
 	razeTime = 0;
 
-	clearWalls();
-	setWalls();
+	//clearWalls();
+	GameObjectGenerator::generateLevel(this, 15);
 
 	m.pos.setX(roadLength);
 }

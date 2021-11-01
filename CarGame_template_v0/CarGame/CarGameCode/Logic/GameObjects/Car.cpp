@@ -15,15 +15,26 @@ Car::Car(Game *game) : GameObject(game){
 }
 
 void Car::update() {
-	//Luego con los estados hago que al principio no se mueva
-	if(!acelerating)HSPEED = HSPEED * DECELERATION;
-	else if(acelerating && HSPEED * ACCELERATION <= MAX_SPEED) HSPEED = HSPEED * ACCELERATION;
+	movement();
 
-    setPosition(getX() + HSPEED, getY());
+	vector<Collider*> gOs = game->getCollisions(this);
+
+	for (auto g : gOs) {
+		g->receiveCarCollision(this);
+	}
+}
+
+void Car::movement()
+{
+	//Luego con los estados hago que al principio no se mueva
+	if (!acelerating)HSPEED = HSPEED * DECELERATION;
+	else if (acelerating && HSPEED * ACCELERATION <= MAX_SPEED) HSPEED = HSPEED * ACCELERATION;
+
+	setPosition(getX() + HSPEED, getY());
 
 	float y = getY();
-    if(up && y - getHeight() / 2 - 5 >= 0)setPosition(getX(), getY() - VSPEED);
-	else if(down && y + getHeight() / 2 <= game->getWindowHeight())setPosition(getX(), getY() + VSPEED);
+	if (up && y - getHeight() / 2 - 5 >= 0)setPosition(getX(), getY() - VSPEED);
+	else if (down && y + getHeight() / 2 <= game->getWindowHeight())setPosition(getX(), getY() + VSPEED);
 }
 
 Car::~Car(){};
@@ -33,20 +44,18 @@ void Car::draw() {
 }
 
 void Car::drawTexture(Texture *texture) {
-	//Se lo resta para que este siempre en el mismo punto
-    int dX = game->getOrigin().getX();
-    int dY = game->getOrigin().getY();
-
     SDL_Rect c = getCollider();
-    SDL_Rect textureBox = { c.x + dX, c.y + dY, c.w, c.h};
+    SDL_Rect textureBox = { c.x, c.y, c.w, c.h};
     texture->render(textureBox);
 }
 
 SDL_Rect Car::getCollider(){
 	//Porque mide la posicion como el extremo derecho central
-    return { int(getX() - getWidth()),
+	//? No puedo poner que la x sea siempre 0 y que la y sea 
+	//? su posicion en y
+    return { 0,
              int(getY() - getHeight() / 2), //Por que /2? 
-             getWidth(),				//Porque y está a la mitad
+             getWidth(),				//Porque pos.y está a la mitad
              getHeight()};
 
 }

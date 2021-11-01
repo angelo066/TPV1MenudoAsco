@@ -17,4 +17,8 @@ public:
 	void drawTexture(Texture* texture);
 
 	virtual SDL_Rect getCollider();
+
+	virtual bool receiveCarCollision(Car* car);
+
+	virtual void onDelete();
 };

@@ -35,6 +35,7 @@ public:
 
     virtual void draw();
     virtual void update();
+	void movement();
     void drawTexture(Texture* texture);  
 
 	float getHorizontalV() { return HSPEED; }

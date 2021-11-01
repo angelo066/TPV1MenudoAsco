@@ -27,7 +27,9 @@ public:
 	virtual void drawDebug() {};
     virtual void update()=0;
 
-    virtual bool toDelete(){return false;}
+    virtual bool toDelete(){
+		return false;
+	}
     virtual void onEnter(){};
     virtual void onDelete(){};
 

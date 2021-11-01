@@ -62,14 +62,13 @@ private:
     SDL_Renderer* renderer = nullptr;
     Font *font;
 
-	std::vector<Wall*> walls;
+	int nRocks = 20;
 
 	GameObjectContainer* container;
 
 	int power = 3;
 	float razeTime = 0;
 
-	void setWalls();
 	void clearWalls();
 
 public:
@@ -119,7 +118,7 @@ public:
 	bool checkCollisions();
 
 	//! Extension del antiguo checkCollisions
-	vector<GameObject*> getCollisions(GameObject* o);
+	vector<Collider*> getCollisions(GameObject* o);
 
 	void deleteWall(int indice);
 
@@ -140,6 +139,10 @@ public:
 	Car* getCar() { return car; }
 
 	bool pointOcuppied(GameObject* o);
+
+	void receiveDmg(int d) { power -= d; }
+
+	void rockDeath() { nRocks--; }
 };
 
 #endif //CARGAME_GAME_H
