@@ -30,7 +30,7 @@ void Game::startGame() {
 	m.pos = Point2D<double>(roadLength,0);
 	//Muros
 	//setWalls();
-	GameObjectGenerator::generateLevel(this, nRocks);
+	GameObjectGenerator::generateLevel(this, nWalls);
 }
 
 bool Game::pointOcuppied(GameObject* o)
@@ -166,11 +166,11 @@ void Game::drawInfo() {
 	Box(rect, BLACK).render(renderer);
 
 	string s = "Pos: " + to_string(int(car->getX())) + " "
-	+ to_string(int(car->getY())) + " "+ "Distance left:" + 
-	to_string((int)roadLength - (int)car->getX()) + " "
-		+ "Speed:" + to_string(car->getHorizontalV()) + " "+
+		+ to_string(int(car->getY())) + " " + "Distance left:" +
+		to_string((int)roadLength - (int)car->getX()) + " "
+		+ "Speed:" + to_string(car->getHorizontalV()) + " " +
 		"Power: " + to_string(power) + " " + "Walls number: " +
-		to_string(nRocks) + " " +"Time:" + 
+		to_string(BadObject::instances) + " " + "Time:" +
 		to_string(razeTime / 30);	//30 porque son los FPS
 
 

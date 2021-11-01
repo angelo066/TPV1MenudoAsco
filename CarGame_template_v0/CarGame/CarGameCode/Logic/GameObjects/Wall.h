@@ -20,5 +20,4 @@ public:
 
 	virtual bool receiveCarCollision(Car* car);
 
-	virtual void onDelete();
 };

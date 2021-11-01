@@ -45,10 +45,6 @@ bool Wall::receiveCarCollision(Car* car)
 	return true;
 }
 
-void Wall::onDelete()
-{
-	game->rockDeath();
-}
 
 void Wall::drawTexture(Texture* texture)
 {

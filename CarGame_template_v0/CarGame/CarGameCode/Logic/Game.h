@@ -62,8 +62,6 @@ private:
     SDL_Renderer* renderer = nullptr;
     Font *font;
 
-	int nRocks = 20;
-
 	GameObjectContainer* container;
 
 	int power = 3;
@@ -142,7 +140,7 @@ public:
 
 	void receiveDmg(int d) { power -= d; }
 
-	void rockDeath() { nRocks--; }
+	void heal(int h) { power += h; }
 };
 
 #endif //CARGAME_GAME_H
