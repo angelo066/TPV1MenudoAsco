@@ -13,7 +13,7 @@ Game::Game(string name, int width, int height, int roadLength) {
     this->height = height;
     doExit = false;
     font = new Font("../Images/Monospace.ttf", 12);
-	s = Playing;
+	s = Menu;
 
 	container = new GameObjectContainer();;
 	debug = false;
@@ -141,8 +141,6 @@ void Game::drawMenuMessage()
 	rect.y += 10;
 	renderText("Level: 0", rect.x, rect.y);
 	rect.y += 10;
-	renderText("Press space to start", rect.x, rect.y);
-	rect.y += 10;
 }
 
 void Game::drawGameOverMessage()
@@ -155,13 +153,9 @@ void Game::drawGameOverMessage()
 		rect.y += 10;
 		renderText("You needed: " + to_string(razeTime / 30) +" seconds", rect.x, rect.y);
 		rect.y += 10;
-		renderText("Press space to play again", rect.x, rect.y);
-		rect.y += 10;
 	}
 	else {
 		renderText("Te comiste todos los muros de España", rect.x, rect.y);
-		rect.y += 10;
-		renderText("Press space to play again", rect.x, rect.y);
 		rect.y += 10;
 	}
 

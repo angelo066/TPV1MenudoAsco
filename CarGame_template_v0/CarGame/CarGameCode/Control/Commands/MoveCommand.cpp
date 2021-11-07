@@ -19,4 +19,12 @@ bool MoveCommand::parse(SDL_Event& event)
 void MoveCommand::execute()
 {
 	game->moveCar(up);
+
+	bool isOver = game->getState() == Gameover;
+
+	if (game->getState() == Menu ||
+		isOver) game->changeState(Playing);
+
+
+	if (isOver) game->resetGame();
 }

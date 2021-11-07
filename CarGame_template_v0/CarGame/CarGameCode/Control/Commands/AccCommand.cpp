@@ -19,4 +19,13 @@ bool AccCommand::parse(SDL_Event& event)
 void AccCommand::execute()
 {
 	game->acelerateCar(accelerate);
+
+	bool isOver = game->getState() == Gameover;
+
+	if (game->getState() == Menu ||
+		isOver) game->changeState(Playing);
+	
+	
+	if (isOver) game->resetGame();
+
 }

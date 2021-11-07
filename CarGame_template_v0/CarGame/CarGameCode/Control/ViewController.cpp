@@ -55,44 +55,6 @@ void ViewController::handleEvents() {
 			break;	//? por que hay aqui un break
 		}
 
-
-		//      if( event.type == SDL_QUIT || event.key.keysym.sym == SDLK_ESCAPE)
-  //          game->setUserExit();
-
-		//switch (game->getState())
-		//{
-		//case Menu:
-		//	if (event.key.keysym.sym == SDLK_SPACE) {
-		//		game->changeState(Playing);
-		//	}
-
-		//	break;
-		//case Playing:
-		//	if (event.key.keysym.sym == SDLK_UP) {
-		//		game->moveCar(true);
-		//	}
-		//	else if (event.key.keysym.sym == SDLK_DOWN) {
-		//		game->moveCar(false);
-		//	}
-		//	else if (event.key.keysym.sym == SDLK_RIGHT) {
-		//		game->acelerateCar(true);
-		//	}
-		//	else if (event.key.keysym.sym == SDLK_LEFT) {
-		//		game->acelerateCar(false);
-		//	}
-		//	break;
-		//case Gameover:
-		//	if (event.key.keysym.sym == SDLK_SPACE) {
-		//		game->changeState(Playing);
-
-		//		game->resetGame();
-		//	}
-
-		//	break;
-		//default:
-		//	break;
-		//}
-
 	}
 }
 
