@@ -16,13 +16,16 @@ void Wall::update()
 	//Para que se muevan
 	setPosition(getX() - game->getCar()->getHorizontalV(),
 		getY());
-
-	if (getX() <= 0) alive = false;
 }
 
 void Wall::draw()
 {
 	drawTexture(game->getTexture(rockTexture));
+}
+
+void Wall::drawDebug()
+{
+	Box(getCollider(), RED).render(game->getRenderer());
 }
 
 //getRect

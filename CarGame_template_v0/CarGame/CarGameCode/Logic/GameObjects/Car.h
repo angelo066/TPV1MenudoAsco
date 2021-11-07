@@ -34,6 +34,7 @@ public:
     ~Car();
 
     virtual void draw();
+	virtual void drawDebug();
     virtual void update();
 	void movement();
 

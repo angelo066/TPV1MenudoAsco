@@ -14,6 +14,7 @@ public:
 
 	virtual void update();
 	virtual void draw();
+	virtual void drawDebug();
 
 	virtual SDL_Rect getCollider();
 

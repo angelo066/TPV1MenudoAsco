@@ -22,6 +22,13 @@ void GameObjectContainer::draw()
 	}
 }
 
+void GameObjectContainer::drawDebug()
+{
+	for (auto gO : gameObjects) {
+		gO->drawDebug();
+	}
+}
+
 void GameObjectContainer::add(GameObject* gameObject)
 {
 	gameObjects.push_back(gameObject);

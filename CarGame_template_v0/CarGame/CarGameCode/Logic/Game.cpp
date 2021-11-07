@@ -13,7 +13,7 @@ Game::Game(string name, int width, int height, int roadLength) {
     this->height = height;
     doExit = false;
     font = new Font("../Images/Monospace.ttf", 12);
-	s = Menu;
+	s = Playing;
 
 	container = new GameObjectContainer();;
 }
@@ -36,6 +36,10 @@ void Game::startGame() {
 bool Game::pointOcuppied(GameObject* o)
 {
 	return container->hasCollision(o);
+}
+
+void Game::clearHelp()
+{
 }
 
 void Game::clearWalls()
@@ -109,6 +113,11 @@ void Game::draw(){
 		drawInfo();
 
 		drawGoal();
+
+		if (debug) {
+			car->drawDebug();
+			container->drawDebug();
+		}
 
 		break;
 	case Gameover:
@@ -301,4 +310,9 @@ void Game::resetGame()
 	GameObjectGenerator::generateLevel(this, 15);
 
 	m.pos.setX(roadLength);
+}
+
+bool Game::isRebased(GameObject* gO)
+{
+	return gO->getX() + gO->getWidth() < 0;
 }

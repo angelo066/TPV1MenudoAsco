@@ -69,6 +69,7 @@ private:
 
 	void clearWalls();
 
+	bool debug = true;
 public:
 
 
@@ -126,7 +127,7 @@ public:
 
 	void resetGame();
 
-	bool isRebased(GameObject* gO) { return false; }
+	bool isRebased(GameObject* gO);
 
 	void appendHelpInfo(string info) {};
 
@@ -141,6 +142,10 @@ public:
 	void receiveDmg(int d) { power -= d; }
 
 	void heal(int h) { power += h; }
+
+	void clearHelp();
+
+	void setDebug(bool d) { debug = d; }
 };
 
 #endif //CARGAME_GAME_H

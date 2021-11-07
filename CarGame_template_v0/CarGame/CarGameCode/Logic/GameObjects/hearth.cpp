@@ -14,12 +14,16 @@ void Hearth::update()
 	setPosition(getX() - game->getCar()->getHorizontalV(),
 		getY());
 
-	if (getX() <= 0) alive = false;
 }
 
 void Hearth::draw()
 {
 	drawTexture(game->getTexture(hearthTexture));
+}
+
+void Hearth::drawDebug()
+{
+	Box(getCollider(), BLACK).render(game->getRenderer());
 }
 
 SDL_Rect Hearth::getCollider()
