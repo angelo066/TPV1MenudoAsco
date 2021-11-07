@@ -16,6 +16,7 @@ Game::Game(string name, int width, int height, int roadLength) {
 	s = Playing;
 
 	container = new GameObjectContainer();;
+	debug = false;
 }
 
 void Game::startGame() {

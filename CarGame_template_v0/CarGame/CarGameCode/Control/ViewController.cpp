@@ -17,6 +17,7 @@ ViewController::ViewController(Game* _game) {
 	commandFactory->add(new QuitCommand());
 	commandFactory->add(new AccCommand());
 	commandFactory->add(new MoveCommand());
+	commandFactory->add(new DebugCommand());
 }
 
 void ViewController::run() {

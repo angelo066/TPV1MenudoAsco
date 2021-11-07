@@ -1,6 +1,4 @@
 #pragma once
-#ifndef CARGAME_ACCCOMMAND_H
-#define CARGAME_ACCCOMMAND_H
 
 #include "Command.h"
 
@@ -20,4 +18,3 @@ public:
 	void execute() override;
 
 };
-#endif //CARGAME_ACCCOMMAND_H

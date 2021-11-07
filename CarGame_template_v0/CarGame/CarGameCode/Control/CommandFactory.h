@@ -3,7 +3,7 @@
 
 #include "Commands/QuitCommand.h"
 #include "Commands/MoveCommand.h"
-//#include "CarGameCode/Control/Commands/DebugCommand.h"
+#include "Commands/DebugCommand.h"
 //#include "CarGameCode/Control/Commands/HelpCommand.h"
 #include "Commands/AccCommand.h"
 #include <vector>

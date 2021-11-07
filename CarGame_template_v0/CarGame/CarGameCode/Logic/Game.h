@@ -69,7 +69,7 @@ private:
 
 	void clearWalls();
 
-	bool debug = true;
+	bool debug;
 public:
 
 
@@ -145,7 +145,9 @@ public:
 
 	void clearHelp();
 
-	void setDebug(bool d) { debug = d; }
+	void changeDebug(bool d) { debug = d; }
+
+	bool getDebug() { return debug; }
 };
 
 #endif //CARGAME_GAME_H
