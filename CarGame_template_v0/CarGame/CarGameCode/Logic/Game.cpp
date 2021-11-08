@@ -7,28 +7,30 @@
 //! Car se queda fuera del container para poder recorrer el container
 //! Borrando los elementos muertos del mismo
 Game::Game(string name, int width, int height, int roadLength) {
-    this->name = name;
-    this->roadLength = roadLength;
-    this->width = width;
-    this->height = height;
-    doExit = false;
-    font = new Font("../Images/Monospace.ttf", 12);
+	this->name = name;
+	this->roadLength = roadLength;
+	this->width = width;
+	this->height = height;
+	doExit = false;
+	font = new Font("../Images/Monospace.ttf", 12);
 	s = Menu;
 
-	container = new GameObjectContainer();;
+	container = new GameObjectContainer();
+	info = new Infobar(this);
 	debug = false;
+	help = false;
 }
 
 void Game::startGame() {
 	//Coche
-    car = new Car(this);
-    car->setDimension(CAR_WIDTH, CAR_HEIGHT);
+	car = new Car(this);
+	car->setDimension(CAR_WIDTH, CAR_HEIGHT);
 	//Para que la posicion sea el extremo derecho central
-    car->setPosition(car->getWidth(), height/ 2.0);
+	car->setPosition(car->getWidth(), height / 2.0);
 
 	//Meta
 	m.t = getTexture(goalTexture);
-	m.pos = Point2D<double>(roadLength,0);
+	m.pos = Point2D<double>(roadLength, 0);
 	//Muros
 	//setWalls();
 	GameObjectGenerator::generateLevel(this, nWalls);
@@ -43,17 +45,35 @@ void Game::clearHelp()
 {
 }
 
+string Game::getStateName()
+{
+	switch (s)
+	{
+	case Menu:
+		return "Menú";
+		break;
+	case Playing:
+		return "Playing";
+		break;
+	case Gameover:
+		return "GameOver";
+		break;
+	default:
+		break;
+	}
+}
+
 void Game::clearWalls()
 {	//Algo hago mal al borrar los muros, y no se que es
 
 }
 
 string Game::getGameName() {
-    return name;
+	return name;
 }
 
 Game::~Game() {
-    cout << "[DEBUG] deleting game" << endl;
+	cout << "[DEBUG] deleting game" << endl;
 
 	clearWalls();
 	delete car;
@@ -62,7 +82,7 @@ Game::~Game() {
 	delete container;
 }
 
-void Game::update(){
+void Game::update() {
 	switch (s)
 	{
 	case Menu:
@@ -101,7 +121,13 @@ void Game::update(){
 	}
 }
 
-void Game::draw(){
+void Game::draw() {
+	//Se pinta siempre
+	info->drawState();
+	if (help) {
+		info->drawHelp();
+	}
+
 	switch (s)
 	{
 	case Menu:
@@ -110,8 +136,9 @@ void Game::draw(){
 	case Playing:
 		car->draw();
 		container->draw();
-		
-		drawInfo();
+
+		//drawInfo();
+		info->drawInfo();
 
 		drawGoal();
 
@@ -120,16 +147,11 @@ void Game::draw(){
 			container->drawDebug();
 		}
 
+
 		break;
 	case Gameover:
 
 		drawGameOverMessage();
-		break;
-
-	case Help:
-		
-		drawHelp();
-
 		break;
 	default:
 		break;
@@ -174,7 +196,7 @@ void Game::drawGameOverMessage()
 	if (razeWon) {
 		renderText("Congratulations, you won", rect.x, rect.y);
 		rect.y += 10;
-		renderText("You needed: " + to_string(razeTime / 30) +" seconds", rect.x, rect.y);
+		renderText("You needed: " + to_string(razeTime / 30) + " seconds", rect.x, rect.y);
 		rect.y += 10;
 	}
 	else {
@@ -293,7 +315,7 @@ bool Game::pointInRect(Point2D<double> p, SDL_Rect r)
 bool Game::rectInRect(const SDL_Rect& r, const SDL_Rect& r2)
 {
 	//Comprobar every esquina
-	bool insideLUc = pointInRect(Point2D<double>(r.x,r.y), r2);
+	bool insideLUc = pointInRect(Point2D<double>(r.x, r.y), r2);
 	bool insideRUc = pointInRect(Point2D<double>(r.x + r.w, r.y), r2);
 	bool insideLDc = pointInRect(Point2D<double>(r.x + r.w, r.y + r.h), r2);
 	bool insideRDc = pointInRect(Point2D<double>(r.x, r.y + r.h), r2);

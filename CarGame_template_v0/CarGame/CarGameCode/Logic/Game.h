@@ -26,7 +26,9 @@
 #include "GameObjects/BadObject.h"
 #include "GameObjectGenerator.h"
 
-enum States{Menu, Playing, Gameover, Help};
+#include "..//View/Infobar.h"
+
+enum States{Menu, Playing, Gameover};
 
 
 using namespace std;
@@ -43,7 +45,7 @@ struct Meta {
 
 class Game{
 
-
+	friend class Infobar;
 private:
 
 	const int nWalls = 20;
@@ -68,13 +70,14 @@ private:
     Font *font;
 
 	GameObjectContainer* container;
+	Infobar* info;
 
 	int power = 3;
 	float razeTime = 0;
 
 	void clearWalls();
 
-	bool debug;
+	bool debug, help;
 public:
 
 
@@ -155,6 +158,18 @@ public:
 	void changeDebug(bool d) { debug = d; }
 
 	bool getDebug() { return debug; }
+
+	bool getHelp() { return help; }
+
+	void setHelp(bool h) { help = h; }
+
+	Font* getFont() { return font; }
+
+	int getPower() { return power; }
+
+	float getRazeTime() { return razeTime; }
+
+	string getStateName();
 };
 
 #endif //CARGAME_GAME_H

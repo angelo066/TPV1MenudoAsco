@@ -5,7 +5,6 @@
 class HelpCommand : public Command
 {
 private:
-	bool help = false;
 
 public:
 	const string INFO_STRING = "Press H for help press j to hide help";
