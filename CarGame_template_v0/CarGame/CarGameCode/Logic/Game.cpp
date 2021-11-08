@@ -125,9 +125,30 @@ void Game::draw(){
 
 		drawGameOverMessage();
 		break;
+
+	case Help:
+		
+		drawHelp();
+
+		break;
 	default:
 		break;
 	}
+}
+
+void Game::drawHelp()
+{
+	//Le pongo algo de offset para que quede en el medio
+	SDL_Rect rect = { getWindowWidth() / 2 - 100,
+		getWindowHeight() / 2 - 50, 200,200 };
+
+
+	renderText("Start by moving the car", rect.x, rect.y);
+	rect.y += 10;
+	renderText("Move the car by presing ->, up or dow", rect.x, rect.y);
+	rect.y += 10;
+	renderText("Press j to close help", rect.x, rect.y);
+	rect.y += 10;
 }
 
 void Game::drawMenuMessage()
@@ -140,6 +161,8 @@ void Game::drawMenuMessage()
 	renderText("Welcome To Super Cars", rect.x, rect.y);
 	rect.y += 10;
 	renderText("Level: 0", rect.x, rect.y);
+	rect.y += 10;
+	renderText("Press h for help", rect.x, rect.y);
 	rect.y += 10;
 }
 

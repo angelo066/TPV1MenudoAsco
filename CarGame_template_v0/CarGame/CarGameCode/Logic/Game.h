@@ -2,6 +2,11 @@
 // Created by eys on 20/8/21.
 //
 
+//? Doble input		//Modificand
+//? Empezar con el primer input del jugador
+//? Como quiere que funcione Help //Ayuda de como jugar
+//? Que debería hacer ClearHelp
+
 #ifndef CARGAME_GAME_H
 #define CARGAME_GAME_H
 
@@ -21,7 +26,7 @@
 #include "GameObjects/BadObject.h"
 #include "GameObjectGenerator.h"
 
-enum States{Menu, Playing, Gameover};
+enum States{Menu, Playing, Gameover, Help};
 
 
 using namespace std;
@@ -79,6 +84,8 @@ public:
     void startGame();
     void update();
     void draw();
+
+	void drawHelp();
 
 	void drawMenuMessage();
 	void drawGameOverMessage();

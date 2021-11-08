@@ -17,7 +17,8 @@ CommandFactory::~CommandFactory()
 Command* CommandFactory::getCommand(SDL_Event& event)
 {
 	for (auto c : availableCommands) {
-		if (c->parse(event)) return c;
+		//! He tenido que modificar el código
+		if (event.type == SDL_KEYDOWN && c->parse(event)) return c;
 	}
 	return nullptr;
 }
