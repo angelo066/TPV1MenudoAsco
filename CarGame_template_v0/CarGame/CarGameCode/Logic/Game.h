@@ -2,10 +2,13 @@
 // Created by eys on 20/8/21.
 //
 
-//? Doble input		//Modificand
-//? Empezar con el primer input del jugador
-//? Como quiere que funcione Help //Ayuda de como jugar
-//? Que debería hacer ClearHelp
+//x Doble input	comprobamos en cada event
+//! Que debería hacer ClearHelp(Borrar el vector del help) 
+//! Donde se llamava a esta vaina
+//x El help es un vector que lleva el game 
+//? es NECESARIO que los estados vayan en el viewController
+//? Empezar con el primer input del jugador 
+//? Chekear bien como tiene que funcionar el input
 
 #ifndef CARGAME_GAME_H
 #define CARGAME_GAME_H
@@ -13,6 +16,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <string>
 
 #include "../View/TextureContainer.h"
 #include "../View/Texture.h"
@@ -78,6 +82,8 @@ private:
 	void clearWalls();
 
 	bool debug, help;
+
+	vector<string> helpInfo;
 public:
 
 
@@ -139,7 +145,7 @@ public:
 
 	bool isRebased(GameObject* gO);
 
-	void appendHelpInfo(string info) {};
+	void appendHelpInfo(string info) { helpInfo.push_back(info); }
 
 	double getRoadL() { return roadLength; }
 
@@ -170,6 +176,8 @@ public:
 	float getRazeTime() { return razeTime; }
 
 	string getStateName();
+
+	void stopCar() { car->stop(); }
 };
 
-#endif //CARGAME_GAME_H
+#endif //CARGAME_GAME_

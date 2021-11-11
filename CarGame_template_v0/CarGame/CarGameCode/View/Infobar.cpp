@@ -41,52 +41,14 @@ void Infobar::drawHelp()
 	SDL_Rect rect = { 0, 20, game->getWindowWidth(),
 				 int(f->getSize() * 1.8) };
 
-	switch (game->s)
-	{
-	case Menu:
-		drawMenuHelp(rect);
-		break;
 
-	case Playing:
-		drawPlayingHelp(rect);
-		break;
+	vector<string> h = game->helpInfo;
 
-	case Gameover:
-		game->renderText("Move To Play Again", rect.x, rect.y);
-		break;
-	default:
-		break;
+	for (int i = 0; i < h.size(); i++) {
+		game->renderText(h[i], rect.x, rect.y);
+		rect.y += 10;
 	}
 
-
-}
-
-void Infobar::drawPlayingHelp(SDL_Rect& rect)
-{
-	game->renderText("[UP/DOWn] to Move", rect.x, rect.y);
-	rect.y += 10;
-	game->renderText("[RIGHT/LEFT] to speed up", rect.x, rect.y);
-	rect.y += 10;
-	game->renderText("[s] to shoot", rect.x, rect.y);
-	rect.y += 10;
-	game->renderText("[q] to debug", rect.x, rect.y);
-	rect.y += 10;
-	game->renderText("[h] to toggle help", rect.x, rect.y);
-	rect.y += 10;
-	game->renderText("[] space to skip", rect.x, rect.y);
-	rect.y += 10;
-	game->renderText("[ESC] to quit", rect.x, rect.y);
-	rect.y += 10;
-}
-
-void Infobar::drawMenuHelp(SDL_Rect& rect)
-{
-	game->renderText("[h] to toggle help", rect.x, rect.y);
-	rect.y += 10;
-	game->renderText("[] space to skip", rect.x, rect.y);
-	rect.y += 10;
-	game->renderText("[ESC] to quit", rect.x, rect.y);
-	rect.y += 10;
 }
 
 void Infobar::drawState()

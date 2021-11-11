@@ -86,9 +86,15 @@ void Car::goinUp(bool upper)
 	}
 }
 
-void Car::stop()
+void Car::resetVelocity()
 {
 	HSPEED = 0;
+	up = false;
+	down = false;
+}
+
+void Car::stop()
+{
 	up = false;
 	down = false;
 }

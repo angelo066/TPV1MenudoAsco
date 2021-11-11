@@ -3,14 +3,17 @@
 
 bool AccCommand::parse(SDL_Event& event)
 {
-	if (event.key.keysym.sym == SDLK_RIGHT) {
-		accelerate = true;
-		return true;
-	}
+	if (event.type == SDL_KEYDOWN) {
 
-	if (event.key.keysym.sym == SDLK_LEFT) {
-		accelerate = false;
-		return true;
+		if (event.key.keysym.sym == SDLK_RIGHT) {
+			accelerate = true;
+			return true;
+		}
+
+		if (event.key.keysym.sym == SDLK_LEFT) {
+			accelerate = false;
+			return true;
+		}
 	}
 
 	return false;
@@ -24,8 +27,8 @@ void AccCommand::execute()
 
 	if (game->getState() == Menu ||
 		isOver) game->changeState(Playing);
-	
-	
+
+
 	if (isOver) game->resetGame();
 
 }

@@ -3,7 +3,8 @@
 
 bool HelpCommand::parse(SDL_Event& event)
 {
-	if (event.key.keysym.sym == SDLK_h) {
+	if (event.key.keysym.sym == SDLK_h && 
+		event.type == SDL_KEYDOWN) {
 		return true;
 	}
 

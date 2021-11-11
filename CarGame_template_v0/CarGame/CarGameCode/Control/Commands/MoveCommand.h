@@ -4,7 +4,7 @@
 class MoveCommand : public Command
 {
 private: 
-	bool up;
+	bool mUp, mDown;
 public:
 	const string INFO_STRING = "Up Arrow to go up Down arrow to go Down";
 

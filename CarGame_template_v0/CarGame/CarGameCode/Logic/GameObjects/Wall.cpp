@@ -43,7 +43,7 @@ bool Wall::receiveCarCollision(Car* car)
 
 	game->receiveDmg(1);
 
-	car->stop();
+	car->resetVelocity();
 
 	return true;
 }

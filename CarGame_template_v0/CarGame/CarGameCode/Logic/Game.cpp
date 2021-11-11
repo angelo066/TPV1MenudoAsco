@@ -343,7 +343,7 @@ void Game::resetGame()
 	power = 3;
 	razeWon = false;
 	car->setPosition(0, height / 2);
-	car->stop();
+	car->resetVelocity();
 	razeTime = 0;
 
 	//clearWalls();

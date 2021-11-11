@@ -3,13 +3,18 @@
 
 bool MoveCommand::parse(SDL_Event& event)
 {
-	if (event.key.keysym.sym == SDLK_UP) {
-		up = true;
+	if (event.type == SDL_KEYDOWN) {
+		mUp = event.key.keysym.sym == SDLK_UP;
+
+		mDown = event.key.keysym.sym == SDLK_DOWN;
+
 		return true;
 	}
+	else if(event.type == SDL_KEYUP) {
+		mUp = false;
 
-	if (event.key.keysym.sym == SDLK_DOWN) {
-		up = false;
+		mDown = false;
+
 		return true;
 	}
 
@@ -18,7 +23,10 @@ bool MoveCommand::parse(SDL_Event& event)
 
 void MoveCommand::execute()
 {
-	game->moveCar(up);
+	//Si va arriba o abajo
+	if (mUp || mDown)
+		game->moveCar(mUp);
+	else game->stopCar();
 
 	bool isOver = game->getState() == Gameover;
 

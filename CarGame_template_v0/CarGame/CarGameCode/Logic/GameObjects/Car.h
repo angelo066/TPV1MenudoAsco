@@ -47,6 +47,8 @@ public:
 
 	void goinUp(bool upper);
 
+	void resetVelocity();
+
 	void stop();
 };
 

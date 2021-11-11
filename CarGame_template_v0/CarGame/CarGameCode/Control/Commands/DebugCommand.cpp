@@ -3,14 +3,17 @@
 
 bool DebugCommand::parse(SDL_Event& event)
 {
-	if (event.key.keysym.sym == SDLK_q){
-		debug = true;
-		return true;
-	}
+	if (event.type == SDL_KEYDOWN) {
+		if (event.key.keysym.sym == SDLK_q) {
+			debug = true;
+			return true;
+		}
 
-	if (event.key.keysym.sym == SDLK_e) {
-		debug = false;
-		return true;
+		if (event.key.keysym.sym == SDLK_e) {
+			debug = false;
+			return true;
+		}
+
 	}
 
 	return false;

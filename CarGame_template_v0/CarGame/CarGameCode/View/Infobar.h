@@ -10,8 +10,6 @@ public:
 
     void drawInfo();
     void drawHelp();
-	void drawPlayingHelp(SDL_Rect& rect);
-	void drawMenuHelp(SDL_Rect& rect);
     void drawState();
 };
 
