@@ -43,6 +43,7 @@ bool Game::pointOcuppied(GameObject* o)
 
 void Game::clearHelp()
 {
+	helpInfo.clear();
 }
 
 string Game::getStateName()
@@ -75,12 +76,12 @@ string Game::getGameName() {
 Game::~Game() {
 	cout << "[DEBUG] deleting game" << endl;
 
-	clearWalls();
 	delete car;
 	delete textureContainer;
 	delete font;
 	delete container;
 	delete info;
+	clearHelp();
 }
 
 void Game::update() {
