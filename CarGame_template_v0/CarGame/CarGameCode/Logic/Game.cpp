@@ -80,6 +80,7 @@ Game::~Game() {
 	delete textureContainer;
 	delete font;
 	delete container;
+	delete info;
 }
 
 void Game::update() {

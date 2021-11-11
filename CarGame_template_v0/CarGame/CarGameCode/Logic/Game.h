@@ -2,13 +2,7 @@
 // Created by eys on 20/8/21.
 //
 
-//x Doble input	comprobamos en cada event
-//! Que debería hacer ClearHelp(Borrar el vector del help) 
-//! Donde se llamava a esta vaina
-//x El help es un vector que lleva el game 
 //? es NECESARIO que los estados vayan en el viewController
-//? Empezar con el primer input del jugador 
-//? Chekear bien como tiene que funcionar el input
 
 #ifndef CARGAME_GAME_H
 #define CARGAME_GAME_H
@@ -32,8 +26,7 @@
 
 #include "..//View/Infobar.h"
 
-enum States{Menu, Playing, Gameover};
-
+enum States { Menu, Playing, Gameover };
 
 using namespace std;
 	//Struct de la meta para que sea más fácil construirla

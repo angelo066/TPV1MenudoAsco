@@ -19,6 +19,7 @@ ViewController::ViewController(Game* _game) {
 	commandFactory->add(new MoveCommand());
 	commandFactory->add(new DebugCommand());
 	commandFactory->add(new HelpCommand());
+	commandFactory->add(new StartCommand());
 }
 
 void ViewController::run() {
@@ -86,4 +87,6 @@ ViewController::~ViewController() {
 	SDL_DestroyRenderer(renderer);
 	SDL_DestroyWindow(window);
 	SDL_Quit();
+
+	delete commandFactory;
 }

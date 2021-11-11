@@ -21,7 +21,7 @@ protected:
 public:
 
     GameObject(Game *game_): game(game_){};
-    virtual ~GameObject(){};
+	virtual ~GameObject() {};
 
     virtual void draw()=0;
 	virtual void drawDebug() {};

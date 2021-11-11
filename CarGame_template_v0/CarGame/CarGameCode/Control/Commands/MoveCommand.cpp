@@ -3,19 +3,26 @@
 
 bool MoveCommand::parse(SDL_Event& event)
 {
-	if (event.type == SDL_KEYDOWN) {
-		mUp = event.key.keysym.sym == SDLK_UP;
+	//Comprobamos que son las flechas
+	//Luego ya comprobamos si están pulsando o levantando
+	if (event.key.keysym.sym == SDLK_UP ||
+		event.key.keysym.sym == SDLK_DOWN) {
 
-		mDown = event.key.keysym.sym == SDLK_DOWN;
+		if (event.type == SDL_KEYDOWN)  {
+			mUp = event.key.keysym.sym == SDLK_UP;
 
-		return true;
-	}
-	else if(event.type == SDL_KEYUP) {
-		mUp = false;
+			mDown = event.key.keysym.sym == SDLK_DOWN;
 
-		mDown = false;
+			return true;
+		}
+		else if (event.type == SDL_KEYUP) {
+			mUp = false;
 
-		return true;
+			mDown = false;
+
+			return true;
+		}
+
 	}
 
 	return false;
@@ -28,11 +35,4 @@ void MoveCommand::execute()
 		game->moveCar(mUp);
 	else game->stopCar();
 
-	bool isOver = game->getState() == Gameover;
-
-	if (game->getState() == Menu ||
-		isOver) game->changeState(Playing);
-
-
-	if (isOver) game->resetGame();
 }

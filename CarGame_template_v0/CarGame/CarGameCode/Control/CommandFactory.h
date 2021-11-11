@@ -6,6 +6,7 @@
 #include "Commands/DebugCommand.h"
 #include "Commands/HelpCommand.h"
 #include "Commands/AccCommand.h"
+#include "Commands/StartCommand.h"
 #include <vector>
 
 class Game;
