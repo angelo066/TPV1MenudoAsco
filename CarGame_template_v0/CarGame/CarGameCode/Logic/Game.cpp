@@ -208,26 +208,6 @@ void Game::drawGameOverMessage()
 
 }
 
-void Game::drawInfo() {
-	int x = font->getSize() / 2;
-	int y = font->getSize() / 2;
-
-	SDL_Rect rect = { 0, 0, getWindowWidth(),
-				 int(font->getSize() * 1.8) };
-	Box(rect, BLACK).render(renderer);
-
-	string s = "Pos: " + to_string(int(car->getX())) + " "
-		+ to_string(int(car->getY())) + " " + "Distance left:" +
-		to_string((int)roadLength - (int)car->getX()) + " "
-		+ "Speed:" + to_string(car->getHorizontalV()) + " " +
-		"Power: " + to_string(power) + " " + "Walls number: " +
-		to_string(BadObject::instances) + " " + "Time:" +
-		to_string(razeTime / 30);	//30 porque son los FPS
-
-
-	renderText(s, x, y);
-}
-
 void Game::drawGoal()
 {
 	SDL_Rect dest = { m.pos.getX(), m.pos.getY(), 50, height };
@@ -305,39 +285,9 @@ int Game::random(int min, int max)
 	return rand() % max + min;
 }
 
-bool Game::pointInRect(Point2D<double> p, SDL_Rect r)
-{
-	double extremoD = r.x + r.w;
-	double extremoS = r.y + r.h;
-
-	return (p.getX() > r.x && p.getX() < extremoD
-		&& p.getY() > r.y && p.getY() < extremoS);
-}
-
-bool Game::rectInRect(const SDL_Rect& r, const SDL_Rect& r2)
-{
-	//Comprobar every esquina
-	bool insideLUc = pointInRect(Point2D<double>(r.x, r.y), r2);
-	bool insideRUc = pointInRect(Point2D<double>(r.x + r.w, r.y), r2);
-	bool insideLDc = pointInRect(Point2D<double>(r.x + r.w, r.y + r.h), r2);
-	bool insideRDc = pointInRect(Point2D<double>(r.x, r.y + r.h), r2);
-
-	return insideLDc || insideLUc || insideRDc || insideRUc;
-}
-
-bool Game::checkCollisions()
-{
-	return true;
-}
-
 vector<Collider*> Game::getCollisions(GameObject* o)
 {
 	return container->getCollisions(o);
-}
-
-void Game::deleteWall(int indice)
-{
-
 }
 
 void Game::resetGame()

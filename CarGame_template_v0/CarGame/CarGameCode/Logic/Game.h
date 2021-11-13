@@ -2,8 +2,6 @@
 // Created by eys on 20/8/21.
 //
 
-//? es NECESARIO que los estados vayan en el viewController
-
 #ifndef CARGAME_GAME_H
 #define CARGAME_GAME_H
 
@@ -109,8 +107,6 @@ public:
     SDL_Renderer *getRenderer();
     void renderText(string text, int x, int y, SDL_Color color={0,0,0});
 
-    void drawInfo();
-
 	void drawGoal();
 
 	void moveCar(bool up);
@@ -119,16 +115,8 @@ public:
 
 	int random(int min,int max);
 
-	bool pointInRect(Point2D<double>p, SDL_Rect r);
-	//Estos metodos existen porque se me habia olvidado que SDL los hacia solo
-	bool rectInRect(const SDL_Rect& r,const SDL_Rect& r2);
-
-	bool checkCollisions();
-
 	//! Extension del antiguo checkCollisions
 	vector<Collider*> getCollisions(GameObject* o);
-
-	void deleteWall(int indice);
 
 	States getState() { return s; }
 
