@@ -24,6 +24,7 @@ void GameObjectGenerator::addInRandomPosition(Game* game, GameObject* o)
 		game->addGameObject(o);
 		o->onEnter();
 	}
+	else delete o;
 }
 
 void GameObjectGenerator::randomPowerUp(Game* g)
