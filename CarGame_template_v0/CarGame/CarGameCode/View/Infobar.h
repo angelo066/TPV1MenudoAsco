@@ -1,6 +1,7 @@
 #ifndef CARGAME_INFOBAR_H
 #define CARGAME_INFOBAR_H
 #include "..//Logic/GameObjects/Car.h"
+#include "..//..//checkML.h"
 class Game;
 
 class Infobar {

@@ -3,6 +3,7 @@
 
 #include "GameObjects/Wall.h"
 #include "GameObjects/hearth.h"
+#include "..//..//checkML.h"
 //He metido aqui class y el include en el cpp
 class Game;
 using Rock = Wall;

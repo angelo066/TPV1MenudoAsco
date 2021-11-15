@@ -23,6 +23,7 @@
 #include "GameObjectGenerator.h"
 
 #include "..//View/Infobar.h"
+#include "..//..//checkML.h"
 
 enum States { Menu, Playing, Gameover };
 
