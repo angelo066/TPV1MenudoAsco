@@ -293,6 +293,7 @@ vector<Collider*> Game::getCollisions(GameObject* o)
 void Game::resetGame()
 {
 	power = 3;
+	coins = 0;
 	razeWon = false;
 	car->setPosition(0, height / 2);
 	car->resetVelocity();

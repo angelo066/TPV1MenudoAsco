@@ -11,11 +11,13 @@ public:
 		alive = true;
 	};
 	~GoodObject() override = default;
-	void update() override {};
+	virtual void update() override;
 	bool toDelete() override;
 
 	void onEnter() override;
 	void onDelete() override;
 	void static reset();
+	
+	virtual SDL_Rect getCollider();
 };
 

@@ -23,7 +23,8 @@ void Infobar::drawInfo()
 		"Power: " + to_string(game->power) + "   " + "Objs: " + "["+
 		to_string(BadObject::instances)+","+ to_string(GoodObject::instances) 
 		+"]"+ " " + "Time:" +
-		to_string(game->razeTime / 30);	//30 porque son los FPS
+		to_string(game->razeTime / 30) + "  " + "Coins:" + 
+		to_string(game->coins);	//30 porque son los FPS
 
 
 	game->renderText(s, x, y);

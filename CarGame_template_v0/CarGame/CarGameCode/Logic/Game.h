@@ -16,7 +16,6 @@
 #include "../View/Font.h"
 
 #include "GameObjects/Car.h"
-#include "GameObjects/Wall.h"
 #include "GameObjects/GameObject.h"
 #include "GameObjectContainer.h"
 #include "GameObjects/BadObject.h"
@@ -46,6 +45,7 @@ private:
 
 	const int nWalls = 20;
 
+	//! Cambiar a archivos de car y wall
     const unsigned int CAR_WIDTH = 100;
     const unsigned  int CAR_HEIGHT = 50;
 
@@ -69,6 +69,7 @@ private:
 	Infobar* info;
 
 	int power = 3;
+	int coins = 0;
 	float razeTime = 0;
 
 	void clearWalls();
@@ -160,6 +161,8 @@ public:
 	string getStateName();
 
 	void stopCar() { car->stop(); }
+
+	void addCoin() { coins++; }
 };
 
 #endif //CARGAME_GAME_

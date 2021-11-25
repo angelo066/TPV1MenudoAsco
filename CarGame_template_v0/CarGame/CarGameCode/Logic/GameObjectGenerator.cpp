@@ -5,8 +5,8 @@ Point2D<int> GameObjectGenerator::generateRandomPosition(Game* game, GameObject*
 {
 	float inferiorLimit = game->getWindowHeight() - o->getHeight();
 
-	double x = rand() % (int)game->getRoadL() + 300;
-	double y = rand() % (int)inferiorLimit + 0;
+	double x = rand() % (int)game->getRoadL() + obtaclesBegin;
+	double y = rand() % (int)inferiorLimit;
 
 	Point2D<int> randPos(x,y);
 

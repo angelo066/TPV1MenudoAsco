@@ -16,9 +16,10 @@ const string IMAGES_PATH = "../Images/";
 enum TextureName {carTexture,
         rockTexture,
         goalTexture,
-		hearthTexture};
+		hearthTexture,
+		coinTexture};
 
-const int NUM_TEXTURES = 4;
+const int NUM_TEXTURES = 5;
 
 typedef struct {
     string filename;
@@ -30,6 +31,7 @@ const TextureAttributes TEXTURE_ATTRIBUTES[NUM_TEXTURES] =
         {{"car.png",1,1},
          {"rock.png",1,1},
          {"goal.png",1,1},
+		{"powerUp.png",1,1},
 		{"coin.png",1,1} };
 
 
