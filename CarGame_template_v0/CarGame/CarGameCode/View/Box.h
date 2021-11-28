@@ -14,7 +14,7 @@
 #define RED SDL_Color({255,0,0})
 #define YELLOW SDL_Color({255,255,0})
 #define COIN SDL_Color({123,125,43}) //Nuevos colores para los nuevos items
-
+#define BULLET SDL_Color({223,45,133})
 class Box {
     SDL_Rect rect;
     SDL_Color color;

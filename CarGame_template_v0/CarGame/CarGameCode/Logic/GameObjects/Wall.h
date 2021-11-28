@@ -4,6 +4,7 @@
 #include "../../View/Box.h"
 #include "Car.h"
 #include "BadObject.h"
+#include "Bullet.h"
 
 class Game;
 
@@ -20,4 +21,5 @@ public:
 
 	virtual bool receiveCarCollision(Car* car);
 
+	virtual bool receiveBulletCollision(Bullet *bullet);
 };

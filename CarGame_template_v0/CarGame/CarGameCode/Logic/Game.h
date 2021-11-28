@@ -69,7 +69,7 @@ private:
 	Infobar* info;
 
 	int power = 3;
-	int coins = 0;
+	int coins = 3;
 	float razeTime = 0;
 
 	void clearWalls();
@@ -163,6 +163,10 @@ public:
 	void stopCar() { car->stop(); }
 
 	void addCoin() { coins++; }
+
+	int getCoins() { return coins; }
+	
+	void useCoin() { coins--; }
 };
 
 #endif //CARGAME_GAME_

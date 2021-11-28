@@ -300,7 +300,7 @@ void Game::resetGame()
 	razeTime = 0;
 
 	//clearWalls();
-	GameObjectGenerator::generateLevel(this, 15);
+	GameObjectGenerator::generateLevel(this, nWalls);
 
 	m.pos.setX(roadLength);
 }

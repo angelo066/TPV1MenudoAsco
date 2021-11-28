@@ -20,6 +20,7 @@ ViewController::ViewController(Game* _game) {
 	commandFactory->add(new DebugCommand());
 	commandFactory->add(new HelpCommand());
 	commandFactory->add(new StartCommand());
+	commandFactory->add(new ShootCommand());
 }
 
 void ViewController::run() {

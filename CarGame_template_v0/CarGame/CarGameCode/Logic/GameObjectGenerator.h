@@ -14,8 +14,6 @@ class GameObjectGenerator {
     Point2D<int> static generateRandomPosition(Game *game, GameObject *o);
     void static addInRandomPosition(Game *game, GameObject *o);
 
-	void static randomPowerUp(Game* g);
-
 	const static int obtaclesBegin = 300;
 	const static int nCoins = 10;
 	const static int nHearths = 10;
@@ -27,7 +25,7 @@ public:
 
 		//Crear power ups alatorios
 		for (int i = 0; i < nHearths; i++) {
-			randomPowerUp(game);
+			addInRandomPosition(game, new Hearth(game));
 
 		}
 

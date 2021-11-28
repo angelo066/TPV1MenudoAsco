@@ -47,3 +47,12 @@ bool Wall::receiveCarCollision(Car* car)
 
 	return true;
 }
+
+bool Wall::receiveBulletCollision(Bullet* bullet)
+{
+	alive = false;
+
+	bullet->collidedWithSomthing();
+
+	return true;
+}

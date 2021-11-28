@@ -18,8 +18,7 @@ void Infobar::drawInfo()
 	string s = "Pos: " + to_string(int(c->getX())) + "   "
 		+ to_string(int(c->getY())) + "   " + "Distance left:" +
 		to_string((int)game->roadLength - (int)c->getX()) + "   "
-		+ "Speed:" + to_string((int)c->getHorizontalV()) + "   " +"Coins:" +
-		to_string(GoodObject::instances)+"   "+
+		+ "Speed:" + to_string((int)c->getHorizontalV()) + "  "
 		"Power: " + to_string(game->power) + "   " + "Objs: " + "["+
 		to_string(BadObject::instances)+","+ to_string(GoodObject::instances) 
 		+"]"+ " " + "Time:" +

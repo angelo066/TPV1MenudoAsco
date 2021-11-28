@@ -27,9 +27,3 @@ void GameObjectGenerator::addInRandomPosition(Game* game, GameObject* o)
 	else delete o;
 }
 
-void GameObjectGenerator::randomPowerUp(Game* g)
-{
-	if (g->random(0, 2)) {
-		addInRandomPosition(g, new Hearth(g));
-	}
-}

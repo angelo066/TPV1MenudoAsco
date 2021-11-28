@@ -7,6 +7,7 @@
 #include "Commands/HelpCommand.h"
 #include "Commands/AccCommand.h"
 #include "Commands/StartCommand.h"
+#include "Commands/ShootCommand.h"
 #include <vector>
 #include "..//..//checkML.h"
 
