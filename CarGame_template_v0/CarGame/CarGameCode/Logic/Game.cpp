@@ -136,8 +136,10 @@ void Game::draw() {
 		drawMenuMessage();
 		break;
 	case Playing:
-		car->draw();
+		//! Primero el container para que se pinte el coche por encima
+		//! Del resto de objetos
 		container->draw();
+		car->draw();
 
 		//drawInfo();
 		info->drawInfo();
@@ -148,7 +150,6 @@ void Game::draw() {
 			car->drawDebug();
 			container->drawDebug();
 		}
-
 
 		break;
 	case Gameover:

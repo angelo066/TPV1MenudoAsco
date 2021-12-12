@@ -43,7 +43,7 @@ class Game{
 	friend class Infobar;
 private:
 
-	const int nWalls = 20;
+	const int nWalls = 10;
 
 	//! Cambiar a archivos de car y wall
     const unsigned int CAR_WIDTH = 100;

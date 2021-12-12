@@ -6,14 +6,14 @@
 
 using namespace std;
 
-
+//? El timer así está correcto, o debería hacerlo con ms
 
 int main(int argc, char* argv[]){
 
     _CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF); // Check Memory Leaks
 
     try {
-        Game *game = new Game("Car game 1.0", 800, 320, 3000);
+        Game *game = new Game("Car game 1.0", 800, 320, 30000);
         ViewController controller(game);
         controller.run();
         delete game;

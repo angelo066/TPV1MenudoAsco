@@ -22,6 +22,9 @@ private:
     const float VSPEED = 5;
     const int MAX_SPEED = 10;
     const int INITIAL_POWER = 3;
+	const float turboTime = 150; //frames
+
+	float turboTimeLeft = 0;
 
 	float HSPEED = 0;
 	
@@ -50,6 +53,8 @@ public:
 	void resetVelocity();
 
 	void stop();
+
+	void setTurbo();
 };
 
 

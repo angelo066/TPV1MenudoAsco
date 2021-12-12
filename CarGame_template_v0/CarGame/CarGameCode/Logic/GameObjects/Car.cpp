@@ -15,6 +15,12 @@ Car::Car(Game *game) : GameObject(game){
 }
 
 void Car::update() {
+	//Se llama una vez al update por cada frame
+	if (turboTimeLeft > 0) 
+		turboTimeLeft--;
+	else if(turboTimeLeft <= 0 && HSPEED > MAX_SPEED)
+		HSPEED = MAX_SPEED;
+
 	movement();
 
 	vector<Collider*> gOs = game->getCollisions(this);
@@ -26,10 +32,13 @@ void Car::update() {
 
 void Car::movement()
 {
-	//Luego con los estados hago que al principio no se mueva
-	if (!acelerating)HSPEED = HSPEED * DECELERATION;
-	else if (acelerating && HSPEED * ACCELERATION <= MAX_SPEED) HSPEED = HSPEED * ACCELERATION;
+	if (turboTimeLeft <= 0) {
 
+		//Luego con los estados hago que al principio no se mueva
+		if (!acelerating)HSPEED = HSPEED * DECELERATION;
+		else if (acelerating && HSPEED * ACCELERATION <= MAX_SPEED) HSPEED = HSPEED * ACCELERATION;
+
+	}
 	setPosition(getX() + HSPEED, getY());
 
 	float y = getY();
@@ -97,4 +106,11 @@ void Car::stop()
 {
 	up = false;
 	down = false;
+}
+
+void Car::setTurbo()
+{
+	turboTimeLeft = turboTime;
+
+	HSPEED = 20;
 }

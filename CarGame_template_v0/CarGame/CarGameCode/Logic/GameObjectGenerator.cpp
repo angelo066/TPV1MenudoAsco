@@ -26,4 +26,3 @@ void GameObjectGenerator::addInRandomPosition(Game* game, GameObject* o)
 	}
 	else delete o;
 }
-

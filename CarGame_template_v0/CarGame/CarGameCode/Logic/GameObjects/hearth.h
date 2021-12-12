@@ -10,4 +10,3 @@ public:
 
 	virtual bool receiveCarCollision(Car* car);
 };
-
