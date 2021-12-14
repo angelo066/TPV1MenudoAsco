@@ -7,7 +7,7 @@ class SuperRock : public BadObject
 {
 public:
 	SuperRock(Game* g, double x = 0,
-		double y = 0, int w_ = 50, int h_ = 50);
+		double y = 0, int w_ = 160, int h_ = 80);
 
 	~SuperRock();
 

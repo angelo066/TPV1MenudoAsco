@@ -7,7 +7,7 @@ class Coin : public GoodObject
 {
 
 public:
-	Coin(Game* gam, double x = 0, double y = 0, int w_ = 50, int h_ = 50);
+	Coin(Game* gam, double x = 0, double y = 0, int w_ = 20, int h_ = 20);
 	~Coin();
 
 private:

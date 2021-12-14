@@ -45,7 +45,7 @@ bool SuperRock::receiveCarCollision(Car* car)
 {
 	alive = false;
 
-	game->receiveDmg(1);
+	game->receiveDmg(2);
 
 	car->resetVelocity();
 

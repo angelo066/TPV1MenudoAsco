@@ -5,6 +5,7 @@
 #include "GameObjects/hearth.h"
 #include "GameObjects/Coin.h"
 #include "GameObjects/Turbo.h"
+#include "GameObjects/SuperRock.h"
 #include "..//..//checkML.h"
 //He metido aqui class y el include en el cpp
 class Game;
@@ -16,9 +17,10 @@ class GameObjectGenerator {
     void static addInRandomPosition(Game *game, GameObject *o);
 
 	const static int obtaclesBegin = 300;
-	const static int nCoins = 0;
-	const static int nHearths = 0;
-	const static int nTurbos = 20;
+	const static int nCoins = 5;
+	const static int nHearths = 3;
+	const static int nTurbos = 2;
+	const static int nSuperRocks = 20;
 public:
     static void generateLevel(Game *game, int N_ROCKS = 0){
 		for (int i = 0; i < N_ROCKS; i++) {
@@ -37,6 +39,10 @@ public:
 
 		for (int i = 0; i < nTurbos; i++) {
 			addInRandomPosition(game, new Turbo(game));
+		}
+
+		for (int i = 0; i < nSuperRocks; i++) {
+			addInRandomPosition(game, new SuperRock(game));
 		}
     }   
 };
