@@ -12,6 +12,7 @@
 #define BLACK SDL_Color({0,0,0})
 #define BLUE SDL_Color({0,0,255})
 #define RED SDL_Color({255,0,0})
+#define SUPERRED SDL_Color({200,0,0})
 #define YELLOW SDL_Color({255,255,0})
 #define COIN SDL_Color({123,125,43}) //Nuevos colores para los nuevos items
 #define BULLET SDL_Color({223,45,133})
