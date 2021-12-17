@@ -55,6 +55,8 @@ public:
 	void stop();
 
 	void setTurbo();
+
+	void setOil();
 };
 
 

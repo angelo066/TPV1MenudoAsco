@@ -114,3 +114,8 @@ void Car::setTurbo()
 
 	HSPEED = 20;
 }
+
+void Car::setOil()
+{
+	HSPEED = HSPEED * 0.7;
+}

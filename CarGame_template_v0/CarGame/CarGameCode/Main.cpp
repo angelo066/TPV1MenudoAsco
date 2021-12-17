@@ -6,8 +6,6 @@
 
 using namespace std;
 
-//? El timer así está correcto, o debería hacerlo con ms
-//? Cambiar tamaños de los sprites
 
 int main(int argc, char* argv[]){
 

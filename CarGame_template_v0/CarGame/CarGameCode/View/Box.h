@@ -17,6 +17,7 @@
 #define COIN SDL_Color({123,125,43}) //Nuevos colores para los nuevos items
 #define BULLET SDL_Color({223,45,133})
 #define TURBO SDL_Color({23,75,33})
+#define OIL SDL_Color({123,175,143})
 class Box {
     SDL_Rect rect;
     SDL_Color color;
