@@ -5,6 +5,9 @@ class Car;
 class Bullet;
 
 class Collider {
+protected:
+	const int waveEffect = 150;
+
 
 public:
     virtual bool receiveCarCollision(Car *car){
@@ -13,6 +16,10 @@ public:
 
 	virtual bool receiveBulletCollision(Bullet* bullet) {
 		return false;
+	};
+
+	virtual void receiveWave() {
+
 	};
 };
 

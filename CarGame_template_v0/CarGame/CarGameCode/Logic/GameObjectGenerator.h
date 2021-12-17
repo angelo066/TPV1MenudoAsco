@@ -18,11 +18,11 @@ class GameObjectGenerator {
     void static addInRandomPosition(Game *game, GameObject *o);
 
 	const static int obtaclesBegin = 300;
-	const static int nCoins = 0;
-	const static int nHearths = 0;
+	const static int nCoins = 15;
+	const static int nHearths = 15;
 	const static int nTurbos = 0;
 	const static int nSuperRocks = 0;
-	const static int nOils = 20;
+	const static int nOils = 0;
 public:
     static void generateLevel(Game *game, int N_ROCKS = 0){
 		for (int i = 0; i < N_ROCKS; i++) {

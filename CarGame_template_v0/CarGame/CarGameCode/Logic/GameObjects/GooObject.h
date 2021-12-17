@@ -19,5 +19,7 @@ public:
 	void static reset();
 	
 	virtual SDL_Rect getCollider();
+
+	virtual void receiveWave();
 };
 

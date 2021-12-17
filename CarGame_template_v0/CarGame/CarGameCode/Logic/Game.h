@@ -167,6 +167,8 @@ public:
 	int getCoins() { return coins; }
 	
 	void useCoin() { coins--; }
+
+	void waveUsed();
 };
 
 #endif //CARGAME_GAME_

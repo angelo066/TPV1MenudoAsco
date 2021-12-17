@@ -8,6 +8,7 @@
 #include "Commands/AccCommand.h"
 #include "Commands/StartCommand.h"
 #include "Commands/ShootCommand.h"
+#include "Commands/WaveCommand.h"
 #include <vector>
 #include "..//..//checkML.h"
 

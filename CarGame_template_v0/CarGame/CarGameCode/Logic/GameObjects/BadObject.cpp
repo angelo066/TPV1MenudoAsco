@@ -11,9 +11,14 @@ void  BadObject::onDelete(){
     instances -= 1;
 };
 
-void BadObject::reset(){
-    instances = 0;
+void BadObject::reset() {
+	instances = 0;
 };
+
+void BadObject::receiveWave()
+{
+	setPosition(getX() + waveEffect, getY());
+}
 
 bool BadObject::toDelete() {
     return !alive || game->isRebased(this);

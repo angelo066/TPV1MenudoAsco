@@ -19,6 +19,8 @@ public:
     void onEnter() override;
     void onDelete() override;
     void static reset();
+
+	virtual void receiveWave();
 };
 
 

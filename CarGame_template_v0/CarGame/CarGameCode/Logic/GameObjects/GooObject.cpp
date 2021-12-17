@@ -35,4 +35,9 @@ SDL_Rect GoodObject::getCollider()
 		getHeight() };
 }
 
+void GoodObject::receiveWave()
+{
+	setPosition(getX() - waveEffect, getY());
+}
+
 int GoodObject::instances = 0;

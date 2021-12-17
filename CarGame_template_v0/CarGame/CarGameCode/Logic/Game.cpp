@@ -64,6 +64,20 @@ string Game::getStateName()
 	}
 }
 
+void Game::waveUsed()
+{
+	if (coins >= 3) {
+
+		auto gO = container->getGameobjects();
+
+		for (auto g : gO) {
+			g->receiveWave();
+		}
+
+		coins -= 3;
+	}
+}
+
 void Game::clearWalls()
 {	//Algo hago mal al borrar los muros, y no se que es
 
