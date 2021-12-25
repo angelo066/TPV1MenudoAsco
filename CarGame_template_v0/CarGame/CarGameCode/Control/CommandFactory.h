@@ -18,6 +18,7 @@ class CommandFactory {
 
     vector<Command *> availableCommands;
     Game *game;
+
 public:
 	CommandFactory(Game* g); 
 

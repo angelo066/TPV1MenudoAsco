@@ -21,9 +21,10 @@ enum TextureName {carTexture,
 		bulletTexture,
 		turboTexture,
 		superRockTexture,
-		oilTexture};
+		oilTexture,
+		truckTexture};
 
-const int NUM_TEXTURES = 9;
+const int NUM_TEXTURES = 10;
 
 typedef struct {
     string filename;
@@ -40,7 +41,8 @@ const TextureAttributes TEXTURE_ATTRIBUTES[NUM_TEXTURES] =
 	  {"bullet.png", 1, 1},
 	  {"turbo.png", 1, 1},
 	  {"superrock.png", 1, 1},
-      {"oil.png", 1, 1}
+      {"oil.png", 1, 1},
+      {"truck.png", 1, 1}
 	};
 
 

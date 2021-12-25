@@ -7,6 +7,7 @@
 #include "GameObjects/Turbo.h"
 #include "GameObjects/SuperRock.h"
 #include "GameObjects/Oil.h"
+#include "GameObjects/Truck.h"
 #include "..//..//checkML.h"
 //He metido aqui class y el include en el cpp
 class Game;
@@ -18,11 +19,12 @@ class GameObjectGenerator {
     void static addInRandomPosition(Game *game, GameObject *o);
 
 	const static int obtaclesBegin = 300;
-	const static int nCoins = 15;
-	const static int nHearths = 15;
-	const static int nTurbos = 0;
-	const static int nSuperRocks = 0;
-	const static int nOils = 0;
+	const static int nCoins = 1;
+	const static int nHearths = 1;
+	const static int nTurbos = 1;
+	const static int nSuperRocks = 1;
+	const static int nOils = 1;
+	const static int nTrucks = 20;
 public:
     static void generateLevel(Game *game, int N_ROCKS = 0){
 		for (int i = 0; i < N_ROCKS; i++) {
@@ -49,6 +51,10 @@ public:
 
 		for (int i = 0; i < nOils; i++) {
 			addInRandomPosition(game, new Oil(game));
+		}
+
+		for (int i = 0; i < nTrucks; i++) {
+			addInRandomPosition(game, new Truck(game));
 		}
     }   
 };
